@@ -2,6 +2,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { offerAdd } from '../redux/actions'
+
 class PageOfferCreate extends React.Component {
   constructor(props) { 
     super(props);
@@ -29,23 +30,24 @@ class PageOfferCreate extends React.Component {
       rating: 0,
       city: '',
       address: '',
-      country:'Poland',
-      
+      country:'Poland',      
       isSaving: false,
-      error: null
-      
+      error: null      
     }
   }
 
   descriptionChanged(e) {
     this.setState({ description: e.target.value });
   }
+
   cityChanged(e) {
     this.setState({ city: e.target.value });
   }
+
   adresChanged(e) {
     this.setState({ address: e.target.value });
   }
+  
   countryChanged(e) {
     this.setState({ country: e.target.value });
   }

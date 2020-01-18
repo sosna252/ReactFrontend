@@ -164,12 +164,51 @@
       "address": "",
       "country": "Poland",
       "id": "5T5E8_3"
-    }
-  ],
-  "users": [
+    },
     {
-      "email": "",
-      "fullName": "Jan Kowalski"
+      "authorId": "",
+      "startDateTime": "",
+      "endDateTime": "",
+      "description": "",
+      "photo": "",
+      "roomNumber": 0,
+      "beds": 0,
+      "price": 10,
+      "rating": 0,
+      "city": "",
+      "address": "",
+      "country": "Poland",
+      "id": "Qz_M9ou"
+    },
+    {
+      "authorId": "",
+      "startDateTime": "",
+      "endDateTime": "",
+      "description": "",
+      "photo": "",
+      "roomNumber": 0,
+      "beds": 0,
+      "price": 10,
+      "rating": 0,
+      "city": "",
+      "address": "",
+      "country": "Poland",
+      "id": "USEKmq2"
+    },
+    {
+      "authorId": "",
+      "startDateTime": "",
+      "endDateTime": "",
+      "description": "",
+      "photo": "",
+      "roomNumber": 0,
+      "beds": 0,
+      "price": 10,
+      "rating": 0,
+      "city": "",
+      "address": "",
+      "country": "Poland",
+      "id": "KwY-Op4"
     }
   ]
 }
