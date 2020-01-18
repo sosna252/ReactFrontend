@@ -1,7 +1,20 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { offerDelete } from '../redux/actions';
 class Offer extends React.Component {
     constructor(props) {
         super(props);
+        this.deleteOffer = this.deleteOffer.bind(this);
+    }
+    deleteOffer = (id) => {        
+        fetch('http://localhost:3004/offers/'+id, {
+        method: 'DELETE'
+        }).then( ()=> {
+            
+              this.props.offerDelete(id);
+              this.props.history.push("/new");
+          })  
     }
     render(){
        return(
@@ -17,6 +30,7 @@ class Offer extends React.Component {
                         <p>Price per day: </p>
                         <p style={{marginLeft:'45%'}}>{this.props.offer.price} </p>
                     </div> 
+                    <button style={{position:'absolute', right:'10px', bottom:'5px'}} onClick={() => {this.deleteOffer(this.props.offer.id)}}> Delete </button>
                 </div>
                 <br/>
             </div>
@@ -24,4 +38,13 @@ class Offer extends React.Component {
        )        
     }
 }
-export default Offer
+
+const mapStateToProps = (state) => {
+    return {     
+    };
+  };
+  
+  const mapDispatchToProps = dispatch => ({
+    offerDelete: id => dispatch(offerDelete(id))
+  });
+export default connect(mapStateToProps, mapDispatchToProps) (withRouter(Offer));

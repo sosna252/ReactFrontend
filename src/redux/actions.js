@@ -1,4 +1,4 @@
-import { OFFERS_LOADED, OFFER_ADD,OFFERS_LOADING,OFFERS_ERROR } from './constants';
+import { OFFERS_LOADED, OFFER_ADD,OFFERS_LOADING,OFFERS_ERROR,OFFER_DELETE } from './constants';
 
 export const offersLoaded = (offers) => {
   return {
@@ -14,6 +14,14 @@ export const offerAdd = (newoffer)=>{
     type: OFFER_ADD,
     payload:{
       newoffer
+    }
+  }
+}
+export const offerDelete = (id)=>{
+  return{
+    type: OFFER_DELETE,
+    payload:{
+      id
     }
   }
 }
