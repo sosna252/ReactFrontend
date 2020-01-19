@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { offerAdd } from '../redux/actions'
 
+
 class PageOfferCreate extends React.Component {
   constructor(props) { 
     super(props);
@@ -64,10 +65,7 @@ class PageOfferCreate extends React.Component {
     this.setState({ beds: Number(e.target.value) });
   }
 
-  
-
   createOffer() {
-   // console.log('hey');
     this.setState({ isSaving: true });  
     const {
       authorId,
@@ -98,7 +96,6 @@ class PageOfferCreate extends React.Component {
       address,
       country
     };
-    console.log(offer);
     console.log(JSON.stringify(offer));
     fetch('http://localhost:3004/offers', {
       method: 'POST', 

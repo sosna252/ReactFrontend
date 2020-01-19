@@ -3,12 +3,16 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { loadOffers } from '../redux/actions'
 import Offer from './Offer'
+import OfferFiltr from './OfferFiltr'
 
 class PageOffersList extends React.Component {
 
   constructor(props) {
     super(props);
-
+    this.state ={
+      filtr: false
+    }
+    this.changeVisibility = this.changeVisibility.bind(this);
   }
 
   componentDidMount() {
@@ -17,7 +21,9 @@ class PageOffersList extends React.Component {
       this.props.loadOffers();
     }
   }
-  
+  changeVisibility(){
+    this.setState({filtr: !this.state.filtr})
+  }
   render() {
     const { loading,offers } = this.props;
 
@@ -28,6 +34,7 @@ class PageOffersList extends React.Component {
     
     return (
       <div>
+        {this.state.filtr ? <div><OfferFiltr changeVisibility={this.changeVisibility}/></div> : <button onClick={this.changeVisibility}>Filtr</button>}
         <h1>Offers List:</h1>
           {offers && offers.map((offer => <Offer key={offer.id} offer={offer} />))}
         <Link to="/new">
