@@ -4,6 +4,11 @@ import { connect } from 'react-redux'
 import { loadOffers } from '../redux/actions'
 import Offer from './Offer'
 import OfferFiltr from './OfferFiltr'
+import {
+  PopupboxManager,
+  PopupboxContainer
+} from 'react-popupbox';
+import "react-popupbox/dist/react-popupbox.css"
 
 class PageOffersList extends React.Component {
 
@@ -13,6 +18,7 @@ class PageOffersList extends React.Component {
       filtr: false
     }
     this.changeVisibility = this.changeVisibility.bind(this);
+    this.openPopupbox = this.openPopupbox.bind(this);
   }
 
   componentDidMount() {
@@ -21,9 +27,26 @@ class PageOffersList extends React.Component {
       this.props.loadOffers();
     }
   }
+
   changeVisibility(){
     this.setState({filtr: !this.state.filtr})
   }
+
+  openPopupbox = (photo) => {
+    const content = <img src={photo} style={{width:'100%', heigh:'100%'}}/>
+    PopupboxManager.open({
+      content,
+      config: {
+        titleBar: {
+          enable: true,
+          text: 'Photo!'
+        },
+        fadeIn: true,
+        fadeInSpeed: 500
+      }
+    })
+  }
+
   render() {
     const { loading,offers } = this.props;
 
@@ -55,10 +78,13 @@ class PageOffersList extends React.Component {
           </div>          
         </div>
         <div style={{clear:'left'}}>
-          {offers && offers.map((offer => <Offer key={offer.id} offer={offer} />))}
+          {offers && offers.map((offer => <Offer key={offer.id} offer={offer} openPopupbox={this.openPopupbox} />))}
           <Link to="/new">
             <button>Create Offer</button>
           </Link>
+          <div>
+          <PopupboxContainer />
+          </div>
         </div>
       </div>
     );
