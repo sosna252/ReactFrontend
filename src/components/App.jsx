@@ -13,12 +13,15 @@ import reduxLogger from 'redux-logger'
 
 import PageOffersList from './PageOffersList';
 import PageOfferCreate from './PageOfferCreate';
+import AppHeader from './Header'
 
 const store = createStore(rootReducer, {}, applyMiddleware(reduxLogger,reduxThunk))
 
 const App = () => (
   <Provider store={store}>
     <Router>
+      <AppHeader />
+      <hr />
       <Switch>      
         <Route exact path="/list">
           <PageOffersList></PageOffersList>
