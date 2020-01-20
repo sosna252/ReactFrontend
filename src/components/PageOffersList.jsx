@@ -33,13 +33,33 @@ class PageOffersList extends React.Component {
     }
     
     return (
-      <div>
-        {this.state.filtr ? <div><OfferFiltr changeVisibility={this.changeVisibility}/></div> : <button onClick={this.changeVisibility}>Filtr</button>}
-        <h1>Offers List:</h1>
+      <div >
+        {this.state.filtr ? <div><OfferFiltr changeVisibility={this.changeVisibility}/></div> : <div><button onClick={this.changeVisibility}>Filtr</button></div>}
+        <div style={{float: 'left', width: '20%'}}>
+          <h1 >Offers List:</h1>
+        </div>
+        <div style={{ float: 'left', position: 'relative', width: '80%', height: '80px'}}>
+          <div style={{ position:'absolute', right: '2px', bottom:'5px' }}>
+            <select>
+              <option>Price high</option>
+              <option>Price low</option>
+              <option>Date low</option>
+              <option>Date high</option>
+              <option>Price high</option>
+              <option>Price low</option>
+              <option>Date low</option>
+              <option>Date high</option>
+            </select>
+            &nbsp;
+            <button>Sort</button>
+          </div>          
+        </div>
+        <div style={{clear:'left'}}>
           {offers && offers.map((offer => <Offer key={offer.id} offer={offer} />))}
-        <Link to="/new">
-          <button>Create Offer</button>
-        </Link>
+          <Link to="/new">
+            <button>Create Offer</button>
+          </Link>
+        </div>
       </div>
     );
   }
