@@ -24,8 +24,8 @@ const appReducer = (state = initialState, action) => {
       return Object.assign({},state,{loading:true,error});
     }
     case OFFER_ADD:{
-      const{newoffer}=action.payload;
-      const newoffers=[...state.offers,newoffer]
+      const {newoffer}=action.payload;
+      const newoffers=[...state.offers, newoffer]
       return Object.assign({},state,{offers: newoffers});     
     }
     case OFFER_DELETE:{

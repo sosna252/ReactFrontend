@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 function Header() {
   return (
-    <nav style={{position:'relative'}}>
+    <nav calssName="menu" style={{position:'relative', width: '100%', margin: 'auto'}}>
       <NavLink exact activeClassName="active" to="/">
       <button>Home</button>
       </NavLink>

@@ -1,0 +1,44 @@
+body, html {
+  height: 100%;
+  background-image: url('background.jpg');
+  background-repeat: no-repeat;
+  background-position: top;  
+  font-family: Calibri,Tahoma, Arial;	
+	font-style: italic;
+  
+}
+.bg {
+  background-image: url('srodkowa_czesc_zawartosci.gif');
+  background-repeat: repeat;
+}
+.up{
+  background-image: url('gorna_czesc_zawartosci.gif');
+  height: 17px;
+  width: 1004px;
+}
+.foot{
+  background-image: url('dolna_czesc_zawartosci.gif');
+  height: 31px;
+  width: 1004px;
+}
+.down{
+  background-image: url('dol.gif');
+  height: 10px;
+  width: 1004px;
+}
+#copyright{
+  position: relative;
+  margin: auto;
+  width: 1004px;
+  text-align: center;
+	font-size: 10px;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	margin-bottom: 10px;
+	color: white;
+}
+#offerdiv :hover {
+  box-shadow: 1px 0px 27px 0px rgba(48,50,50,1);
+  width: 954px;
+  height: 115px;
+  
+}

@@ -59,6 +59,21 @@
       "city": "Warsaw",
       "address": "Al. Jerozolimskie 12",
       "country": "Poland"
+    },
+    {
+      "authorId": "",
+      "startDateTime": "",
+      "endDateTime": "",
+      "description": "",
+      "photo": "",
+      "roomNumber": 0,
+      "beds": 12,
+      "price": 10,
+      "rating": 0,
+      "city": "",
+      "address": "",
+      "country": "Poland",
+      "id": "81jwAEZ"
     }
   ]
 }
