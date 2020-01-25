@@ -7,20 +7,10 @@ import { offerAdd } from '../redux/actions'
 class PageOfferCreate extends React.Component {
   constructor(props) { 
     super(props);
-
-    this.descriptionChanged = this.descriptionChanged.bind(this);
-    this.cityChanged = this.cityChanged.bind(this);
-    this.adresChanged = this.adresChanged.bind(this);
-    this.countryChanged = this.countryChanged.bind(this);
-    this.roomNumberChanged = this.roomNumberChanged.bind(this);
-    this.priceChanged = this.priceChanged.bind(this);
-    this.bedsChanged = this.bedsChanged.bind(this);
-    this.createOffer = this.createOffer.bind(this);
-
-    //this.startDateChanged = this.startDateChanged.bind(this);
     
     this.state = {
       authorId:'',
+      title: '',
       startDateTime: '',
       endDateTime: '',
       description: '',
@@ -35,10 +25,25 @@ class PageOfferCreate extends React.Component {
       isSaving: false,
       error: null      
     }
+
+    this.descriptionChanged = this.descriptionChanged.bind(this);
+    this.cityChanged = this.cityChanged.bind(this);
+    this.adresChanged = this.adresChanged.bind(this);
+    this.countryChanged = this.countryChanged.bind(this);
+    this.roomNumberChanged = this.roomNumberChanged.bind(this);
+    this.priceChanged = this.priceChanged.bind(this);
+    this.bedsChanged = this.bedsChanged.bind(this);
+    this.titleChanges = this.titleChanged.bind(this);
+    this.createOffer = this.createOffer.bind(this);
+
   }
 
   descriptionChanged(e) {
     this.setState({ description: e.target.value });
+  }
+
+  titleChanged(e) {
+    this.setState({ title: e.target.value });
   }
 
   cityChanged(e) {
@@ -69,6 +74,7 @@ class PageOfferCreate extends React.Component {
     this.setState({ isSaving: true });  
     const {
       authorId,
+      title,
       startDateTime,
       endDateTime,
       description,
@@ -84,6 +90,7 @@ class PageOfferCreate extends React.Component {
 
     const offer = {
       authorId,
+      title,
       startDateTime,
       endDateTime,
       description,
@@ -117,6 +124,7 @@ class PageOfferCreate extends React.Component {
 
   render() {
     const {
+      title,
       description,
       roomNumber,
       beds,
@@ -132,8 +140,9 @@ class PageOfferCreate extends React.Component {
       <div className="bg" style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: '1004px', margin: 'auto'}}>
         <div style={{width: '944px'}}>
           <h1>Enter offer data:</h1>
+          <div>Title: <input type="text" value={title} onChange={this.titleChanged} disabled={isSaving}/></div>
           <div>Room Number: <input type="number" min="1" value={roomNumber} onChange={this.roomNumberChanged} disabled={isSaving}/></div>
-          <div>Number of beds: <input type="number" min="1" value={beds} onChange={this.bedsChanged} disabled={isSaving}/></div>
+          <div>Number of beds: <input type="number" min="1"  onChange={this.bedsChanged} disabled={isSaving}/></div>
           <div>Price: <input type="number"  min="10" value={price} onChange={this.priceChanged} disabled={isSaving}/></div>
           <div>City: <input type="text"  value={city} onChange={this.cityChanged} disabled={isSaving}/></div>
           <div>Address: <input type="text"  value={address} onChange={this.adresChanged} disabled={isSaving}/></div>

@@ -1,14 +1,15 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { loadOffers } from '../redux/actions'
-import Offer from './Offer'
-import OfferFiltr from './OfferFiltr'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { loadOffers } from '../redux/actions';
+import Offer from './Offer';
+import OfferFiltr from './OfferFiltr';
 import {
   PopupboxManager,
   PopupboxContainer
 } from 'react-popupbox';
-import "react-popupbox/dist/react-popupbox.css"
+import "react-popupbox/dist/react-popupbox.css";
+import Button from 'react-bootstrap/Button';
 
 class PageOffersList extends React.Component {
 
@@ -58,12 +59,17 @@ class PageOffersList extends React.Component {
       <div align="center">
         <div className="bg" style={{width: '1004px',}}>
           <div align="left" style={{width: '944px', position: 'relative', textAlign: 'justify'}}>
-            {this.state.filtr ? <div style={{position: 'absolute', left: '40%', top: '10px'}}><OfferFiltr changeVisibility={this.changeVisibility}/></div> : <div style={{position: 'absolute', left: '50%'}}><button onClick={this.changeVisibility}>Filtr</button></div>}
-            {this.state.filtr ? <div><br /><br /><br /> </div>: <br />}
-            <div style={{float: 'left', width: '20%'}}>
+            {this.state.filtr ? 
+              <div style={{position: 'absolute', left: '40%', top: '10px', zIndex:'1'}}>
+                <OfferFiltr changeVisibility={this.changeVisibility}/>
+              </div>
+             : 
+              <div style={{position: 'absolute', left: '50%'}}><Button variant="outline-info" size="sm" onClick={this.changeVisibility}>Filtr</Button></div>}
+            {this.state.filtr ? <div><br /><br /> </div>: <br />}
+            <div style={{float: 'left', width: '30%'}}>
               <h1 >Offers List:</h1>
             </div>
-            <div style={{ float: 'left', position: 'relative', width: '80%', height: '80px'}}>
+            <div style={{ float: 'left', position: 'relative', width: '70%', height: '80px'}}>
               <div style={{ position:'absolute', right: '2px', bottom:'5px' }}>
                 <select>
                   <option>Price high</option>
@@ -76,7 +82,7 @@ class PageOffersList extends React.Component {
                   <option>Date high</option>
                 </select>
                 &nbsp;
-                <button>Sort</button>
+                <Button variant="outline-dark" size="sm">Sort</Button>
               </div>          
             </div>
           </div>
@@ -87,7 +93,7 @@ class PageOffersList extends React.Component {
               {offers && offers.map((offer => <Offer key={offer.id} offer={offer} openPopupbox={this.openPopupbox} detailsVisible={this.detailsVisible}/>))}
               <br />
               <Link to="/new">
-                <button>Create Offer</button>
+                <Button variant="outline-secondary">Create Offer</Button>
               </Link>
               <div>
               <PopupboxContainer />

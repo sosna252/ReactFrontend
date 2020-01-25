@@ -2,6 +2,7 @@
   "offers": [
     {
       "id": "834d6364-3fd9-4a07-a6da-e8e5b48df405",
+      "title": "Jakiś przykładowy tytył",
       "authorId": "89d64f0b-8437-4d40-8b52-1b80d8e4521a",
       "startDateTime": "2020-11-21T00:00:00",
       "endDateTime": "2020-11-30T00:00:00",
@@ -18,6 +19,7 @@
     {
       "id": "c65e01ac-e3cf-48a2-81a3-2fa4e5e16ab8",
       "authorId": "9bb4fc1b-643a-4cec-a3d8-ea0e2c59398e",
+      "title": "Jakiś przykładowy tytył",
       "startDateTime": "2019-12-25T00:00:00",
       "endDateTime": "2019-12-26T00:00:00",
       "description": "jakis przykładowy opis",
@@ -33,6 +35,7 @@
     {
       "id": "35c40c6e-6dcf-4298-b172-facfbfc04948",
       "authorId": "53814c8a-ef1b-4aa0-93f5-259b548768dc",
+      "title": "Jakiś przykładowy tytył",
       "startDateTime": "2020-01-01T00:00:00",
       "endDateTime": "2020-01-30T00:00:00",
       "description": "jakis przykładowy opis",
@@ -48,6 +51,7 @@
     {
       "id": "33a40c6e-7dcf-8798-b172-facfbfc04948",
       "authorId": "53814c8a-ef1b-4aa0-93f5-259b548768dc",
+      "title": "Jakiś przykładowy tytył",
       "startDateTime": "2020-01-01T00:00:00",
       "endDateTime": "2020-01-30T00:00:00",
       "description": "jakis przykładowy opis",
@@ -62,6 +66,7 @@
     },
     {
       "authorId": "",
+      "title": "Jakiś przykładowy tytył",
       "startDateTime": "",
       "endDateTime": "",
       "description": "",

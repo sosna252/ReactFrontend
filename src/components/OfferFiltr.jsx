@@ -1,5 +1,6 @@
 
 import React from 'react'
+import Button from 'react-bootstrap/Button';
 
 class OfferFiltr extends React.Component {
 
@@ -33,8 +34,8 @@ class OfferFiltr extends React.Component {
             <option value="City">City</option>
           </select>
           <br />
-        <button onClick={() => {this.props.changeVisibility()}}>Filtr</button>
-        <button onClick={() => {this.props.changeVisibility()}}>Cancel</button>
+        <Button variant="success" size="sm" onClick={() => {this.props.changeVisibility()}}>Filtr</Button>
+        <Button variant="warning" size="sm" onClick={() => {this.props.changeVisibility()}}>Cancel</Button>
       </div>
     );
   }
