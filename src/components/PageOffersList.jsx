@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loadOffers } from '../redux/actions';
 import Offer from './Offer';
+import OfferEdit from './OfferEdit'
 import OfferFiltr from './OfferFiltr';
 import {
   PopupboxManager,
   PopupboxContainer
 } from 'react-popupbox';
+
+import { offerDelete } from '../redux/actions';
 import "react-popupbox/dist/react-popupbox.css";
 import Button from 'react-bootstrap/Button';
 
@@ -20,6 +23,9 @@ class PageOffersList extends React.Component {
     }
     this.changeVisibility = this.changeVisibility.bind(this);
     this.openPopupbox = this.openPopupbox.bind(this);
+    this.editOffer = this.editOffer.bind(this);
+    this.cancelUpdate = this.cancelUpdate.bind(this);
+    this.Update = this.Update.bind(this);
   }
 
   componentDidMount() {
@@ -29,12 +35,22 @@ class PageOffersList extends React.Component {
     }
   }
 
+  deleteOffer = (e,id) => {
+    fetch('http://localhost:3004/offers/'+id, {
+    method: 'DELETE'
+    })
+    .then( ()=> {            
+          this.props.offerDelete(id);
+          this.props.loadOffers();
+      })  
+  }
+
   changeVisibility(){
     this.setState({filtr: !this.state.filtr})
   }
 
   openPopupbox = (photo) => {
-    const content = <img src={photo} style={{width:'100%', heigh:'100%'}}/>
+    const content = <img src={photo} style={{width:'90%', heigh:'90%'}}/>
     PopupboxManager.open({
       content,
       config: {
@@ -47,6 +63,31 @@ class PageOffersList extends React.Component {
       }
     })
   }
+  cancelUpdate() {
+    PopupboxManager.close();
+  }
+  Update() {
+    loadOffers();
+    PopupboxManager.close();
+  }
+
+  editOffer(offer) {
+    const content = (
+      <OfferEdit offer={offer} cancelUpdate={this.cancelUpdate} Update={this.Update} />
+    )
+    PopupboxManager.open({
+      content,
+      config: {
+        titleBar: {
+          enable: true,
+          text: 'Update Data'
+        },
+        fadeIn: true,
+        fadeInSpeed: 500
+      }
+    })
+  }
+
   
   detailsVisible = () => {
     console.log('hey');
@@ -64,7 +105,7 @@ class PageOffersList extends React.Component {
                 <OfferFiltr changeVisibility={this.changeVisibility}/>
               </div>
              : 
-              <div style={{position: 'absolute', left: '50%'}}><Button variant="outline-info" size="sm" onClick={this.changeVisibility}>Filtr</Button></div>}
+              <div style={{position: 'absolute', left: '50%'}}><Button variant="outline-info" size="sm" className="rounded-circle" onClick={this.changeVisibility}>Filtr</Button></div>}
             {this.state.filtr ? <div><br /><br /> </div>: <br />}
             <div style={{float: 'left', width: '30%'}}>
               <h1 >Offers List:</h1>
@@ -82,7 +123,7 @@ class PageOffersList extends React.Component {
                   <option>Date high</option>
                 </select>
                 &nbsp;
-                <Button variant="outline-dark" size="sm">Sort</Button>
+                <Button className="rounded-pill" variant="outline-dark" size="sm">Sort</Button>
               </div>          
             </div>
           </div>
@@ -90,10 +131,18 @@ class PageOffersList extends React.Component {
             <p style={{clear:'left'}}>Loading ...</p>
             :
             <div style={{clear:'left'}}>
-              {offers && offers.map((offer => <Offer key={offer.id} offer={offer} openPopupbox={this.openPopupbox} detailsVisible={this.detailsVisible}/>))}
+              {offers && offers.map((offer => 
+              <Offer 
+              key={offer.id}
+              offer={offer} 
+              openPopupbox={this.openPopupbox}
+              detailsVisible={this.detailsVisible}
+              deleteOffer={this.deleteOffer}
+              editOffer={this.editOffer}
+              />))}
               <br />
               <Link to="/new">
-                <Button variant="outline-secondary">Create Offer</Button>
+                <Button variant="outline-secondary" className="rounded-pill"> <i className="fa fa-plus"></i> Create Offer</Button>
               </Link>
               <div>
               <PopupboxContainer />
@@ -115,7 +164,8 @@ const mapStateToProps = (state /*, ownProps*/) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
- loadOffers: ()=> dispatch(loadOffers())
+ loadOffers: ()=> dispatch(loadOffers()),
+ offerDelete: id => dispatch(offerDelete(id)),
 })
 
 export default connect(

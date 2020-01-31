@@ -39,7 +39,7 @@ const App = () => (
       <AppFooter />
       <div className="down" style={{position:'relative', width: '1004px', margin: 'auto'}} />
       <div id="copyright">
-					&copy; 2020, <strong>React</strong> created by <em>Bookly</em>
+					&copy; 2020, <strong>React</strong> created by <em>Flatly</em>
 				</div>
     </Router>
   </Provider>

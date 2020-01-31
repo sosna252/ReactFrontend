@@ -1,7 +1,4 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { offerDelete } from '../redux/actions';
 import photo from '../IMG/photo.jpg'
 import Button from 'react-bootstrap/Button';
 
@@ -11,15 +8,7 @@ class Offer extends React.Component {
         this.state={
             details: false,
         }
-        this.deleteOffer = this.deleteOffer.bind(this);
         this.detailsVisible = this.detailsVisible.bind(this);
-    }
-    deleteOffer = (id) => {        
-        fetch('http://localhost:3004/offers/'+id, {
-        method: 'DELETE'
-        }).then( ()=> {            
-              this.props.offerDelete(id);
-          })  
     }
     detailsVisible = () => {
         this.setState({details: !this.state.details})
@@ -28,9 +17,9 @@ class Offer extends React.Component {
     render(){
        return(
             <div  style={{ clear: 'left', marginBottom:'2px'}} >
-                <div style={{border:'outset grey', padding:'0.5px', position:'relative',height:'110px', width:'944px', textAlign:'justify'}} onClick={()=> {this.detailsVisible()}}>
+                <div className="off" style={{border:'outset grey', padding:'0.5px', position:'relative',height:'110px', width:'944px', textAlign:'justify'}} onClick={()=> {this.detailsVisible()}}>
                     <div style={{width:'15%', float:'left', height:"100%"}}>
-                        <img src={photo} onClick={() => {this.props.openPopupbox(photo),this.detailsVisible(2)}} style={{width:'100%', height:"100%"}} />
+                        <img src={photo} onClick={() => {this.props.openPopupbox(photo)}} style={{width:'100%', height:"100%", borderRadius: '5px 0px 0px 5px'}} />
                     </div>
                     <div style={{width:'80%', float:'left'}}>                        
                         <p style={{textAlign: "center"}}><strong>Title :</strong> {this.props.offer.title}</p>
@@ -44,7 +33,8 @@ class Offer extends React.Component {
                         </p>
                         
                     </div> 
-                    <Button variant="outline-danger" size="sm" style={{position:'absolute', right:'10px', bottom:'5px'}} onClick={() => {this.deleteOffer(this.props.offer.id)}}> Delete </Button>
+                    <Button className="rounded-pill shadow" variant="outline-danger" size="sm" style={{position:'absolute', right:'10px', bottom:'5px'}} onClick={(e) => {this.props.deleteOffer(e,this.props.offer.id)}}> Delete </Button>
+                    <Button className="rounded-pill shadow" variant="outline-primary" size="sm" style={{position:'absolute', right:'80px', bottom:'5px'}} onClick={() => {this.props.editOffer(this.props.offer)}}> Edit </Button>
                 </div>
                 {this.state.details ?
                     <div style={{borderStyle:'none outset outset outset',borderColor: 'grey', padding:'0.5px', position:'relative', position: 'relative', width:'944px', textAlign:'justify'}}>
@@ -74,13 +64,4 @@ class Offer extends React.Component {
        )        
     }
 }
-
-const mapStateToProps = () => {
-    return {     
-    };
-  };
-  
-  const mapDispatchToProps = dispatch => ({
-    offerDelete: id => dispatch(offerDelete(id)),
-  });
-export default connect(mapStateToProps, mapDispatchToProps) (withRouter(Offer));
+export default Offer;

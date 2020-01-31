@@ -36,9 +36,26 @@ body, html {
 	margin-bottom: 10px;
 	color: white;
 }
-#offerdiv :hover {
-  box-shadow: 1px 0px 27px 0px rgba(48,50,50,1);
-  width: 954px;
-  height: 115px;
-  
+.shadow :hover{
+  box-shadow: 10px 10px 27px 10px rgba(48,50,50,1) !important;
+}
+.off{
+  border-radius: 10px;
+}
+.grid-container {
+  display: grid;
+  width: 60%;
+  grid-template-columns: 200px auto;
+  text-align: left;
+}
+
+.input-transfer-data {
+  width: 20em;
+  max-width: 20em;
+  min-width: 20em;
+  border-radius: 15px !important;
+}
+
+textarea.input-transfer-data {
+  padding: 5px;
 }

@@ -1,4 +1,4 @@
-import { OFFERS_LOADED, OFFER_ADD,OFFERS_LOADING,OFFERS_ERROR,OFFER_DELETE } from './constants';
+import { OFFERS_LOADED, OFFER_ADD,OFFERS_LOADING,OFFERS_ERROR,OFFER_DELETE,OFFER_EDIT} from './constants';
 
 export const offersLoaded = (offers) => {
   return {
@@ -8,12 +8,19 @@ export const offersLoaded = (offers) => {
     }
   };
 }
-
 export const offerAdd = (newoffer)=>{
   return{
     type: OFFER_ADD,
     payload:{
       newoffer
+    }
+  }
+}
+export const offerEfit = (offer)=>{
+  return{
+    type: OFFER_EDIT,
+    payload:{
+      offer
     }
   }
 }
@@ -25,20 +32,20 @@ export const offerDelete = (id)=>{
     }
   }
 }
-  export const offersLoadingError=(error)=>{
-    return{
-      type: OFFERS_ERROR,
-      payload:{
-        error
-      }
+export const offersLoadingError=(error)=>{
+  return{
+    type: OFFERS_ERROR,
+    payload:{
+      error
     }
   }
+}
 
-  export const offersLoadingOffers=()=>{
-    return{
-      type: OFFERS_LOADING
-      }
-    }
+export const offersLoadingOffers=()=>{
+  return{
+    type: OFFERS_LOADING
+  }
+}
   
     
 
@@ -52,4 +59,26 @@ export const loadOffers=()=>{
     (error)=>dispatch(offersLoadingError(error))
     );
   };
-  }
+}
+export const sortOffers=()=>{
+  return(dispatch)=>{
+    dispatch(offersLoadingOffers())
+    fetch('http://localhost:3004/offers')
+    .then((data) => data.json())
+    .then(
+    (offers) => dispatch(offersSorted(offers)),
+    (error)=>dispatch(offersLoadingError(error))
+    );
+  };
+}
+export const filtrOffers=()=>{
+  return(dispatch)=>{
+    dispatch(offersLoadingOffers())
+    fetch('http://localhost:3004/offers')
+    .then((data) => data.json())
+    .then(
+    (offers) => dispatch(offersFiltred(offers)),
+    (error)=>dispatch(offersLoadingError(error))
+    );
+  };
+}

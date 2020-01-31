@@ -1,28 +1,27 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { offerAdd } from '../redux/actions'
+import { offerEdit } from '../redux/actions'
 import Button from 'react-bootstrap/Button';
 
-class PageOfferCreate extends React.Component {
+class OfferEdit extends React.Component {
   constructor(props) { 
     super(props);
     
     this.state = {
-      authorId:'',
-      title: '',
-      startDateTime: '',
-      endDateTime: '',
-      description: '',
-      photo: '',
-      roomNumber: 1,
-      beds: 1,
-      price: 10,
-      rating: 0,
-      city: '',
-      address: '',
-      country:'Poland',      
-      isSaving: false,
+      authorId: this.props.offer.authorId,
+      title: this.props.offer.title,
+      startDateTime: this.props.offer.startDateTime,
+      endDateTime: this.props.offer.endDateTime,
+      description: this.props.offer.description,
+      photo: this.props.offer.photo,
+      roomNumber: this.props.offer.roomNumber,
+      beds: this.props.offer.beds,
+      price: this.props.offer.price,
+      rating: this.props.offer.rating,
+      city: this.props.offer.city,
+      address: this.props.offer.address,
+      country: this.props.offer.country,
       error: null      
     }
 
@@ -34,7 +33,7 @@ class PageOfferCreate extends React.Component {
     this.priceChanged = this.priceChanged.bind(this);
     this.bedsChanged = this.bedsChanged.bind(this);
     this.titleChanged = this.titleChanged.bind(this);
-    this.createOffer = this.createOffer.bind(this);
+    this.editOffer = this.editOffer.bind(this);
 
   }
 
@@ -70,8 +69,7 @@ class PageOfferCreate extends React.Component {
     this.setState({ beds: Number(e.target.value) });
   }
 
-  createOffer (e) {
-    e.preventDefault();
+  editOffer (e) {
     console.log('hey');
     this.setState({ isSaving: true });  
     const {
@@ -118,8 +116,8 @@ class PageOfferCreate extends React.Component {
       if(res.status !== 201) {
         this.setState({ isSaving: false, error: `Saving returned status ${res.status}`})
       } else {
-        this.props.offerAdd(offer);
-        this.props.history.push("/list");
+        this.props.offerEdit(offer);
+        this.props.Update();
       }
     })  
   }
@@ -139,10 +137,10 @@ class PageOfferCreate extends React.Component {
 
     return (
       <div align="center">
-        <div className="bg" style={{width: '1004px'}}>
-          <div align="center" style={{width: '944px', position: 'relative'}}>
-            <h1>Enter offer data:</h1>                
-            <form onSubmit={(e)=>this.createOffer(e)}>
+        <div className="bg" style={{width: '650px'}}>
+          <div align="left" style={{width: '500px', position: 'relative'}}>
+            <h1 align="center">Update data:</h1>                
+            <form onSubmit={(e)=>this.editOffer(e)}>
                 <div className="grid-container">
                   <div><label htmlFor="title" className="label-text">Title : </label></div>
                   <div><input id="title" className="form-control input-transfer-data "  name="title" minLength="2" type="text" value={title} onChange={this.titleChanged} disabled={isSaving} /></div>
@@ -181,11 +179,11 @@ class PageOfferCreate extends React.Component {
                   
 
                   <div><label htmlFor="description" className="label-text">Description : </label></div>
-		              <div><textarea id="description" className="input-transfer-data form-control" name="description" value={description} onChange={this.descriptionChanged} disabled={isSaving}></textarea></div>
+                  <div><textarea id="description" className="input-transfer-data form-control" name="description" value={description} onChange={this.descriptionChanged} disabled={isSaving}></textarea></div>
                 </div>
                 <br />
-                <Button variant="outline-success" type="submit">{!isSaving ? <span>Create offer</span> : <span>Saving ...</span>}</Button>
-                <Button variant="outline-warning" onClick={() => this.props.history.push("/list")} >Cancel</Button> 
+                <Button align="right" variant="outline-success" type="submit">{!isSaving ? <span>Update</span> : <span>Saving ...</span>}</Button>
+                <Button variant="outline-warning" onClick={() => this.props.cancelUpdate()} >Cancel</Button> 
             </form>
             <br />
           </div>
@@ -194,15 +192,13 @@ class PageOfferCreate extends React.Component {
     );
   }
 }
-
-
 const mapStateToProps = (state) => {
-  return {     
+    return {     
+    };
   };
-};
-
-const mapDispatchToProps = dispatch => ({
-  offerAdd: newoffer => dispatch(offerAdd(newoffer))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps) (withRouter(PageOfferCreate));
+  
+  const mapDispatchToProps = dispatch => ({
+    offerEdit: offer => dispatch(offerEdit(offer))
+  });
+  
+  export default connect(mapStateToProps, mapDispatchToProps) (withRouter(OfferEdit));

@@ -1,4 +1,4 @@
-import { OFFERS_LOADED,OFFER_ADD,OFFERS_LOADING,OFFERS_ERROR, OFFER_DELETE } from './constants';
+import { OFFERS_LOADED,OFFER_ADD,OFFERS_LOADING,OFFERS_ERROR, OFFER_DELETE, OFFER_EDIT } from './constants';
 
 export const initialState = {
   offers: [],
@@ -30,6 +30,11 @@ const appReducer = (state = initialState, action) => {
     }
     case OFFER_DELETE:{
       return state;     
+    }
+    case OFFER_EDIT:{
+      const {editoffer}=action.payload;
+      const editoffers=[...state.offers, editoffer]
+      return Object.assign({},state,{offers: editoffers});   
     }
     default:
         return state
