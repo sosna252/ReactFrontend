@@ -1,10 +1,11 @@
-import { OFFERS_LOADED,OFFER_ADD,OFFERS_LOADING,OFFERS_ERROR, OFFER_DELETE, OFFER_EDIT } from './constants';
+import { OFFERS_LOADED,OFFER_ADD,OFFERS_LOADING,OFFERS_ERROR, OFFER_DELETE, OFFER_EDIT,USER_LOGGING } from './constants';
 
 export const initialState = {
   offers: [],
   offLoaded: false,
   error: null,
-  loading:false
+  loading:false,
+  user:null
 };
 
 // Read this: https://redux.js.org/basics/reducers
@@ -35,6 +36,10 @@ const appReducer = (state = initialState, action) => {
       const {editoffer}=action.payload;
       const editoffers=[...state.offers, editoffer]
       return Object.assign({},state,{offers: editoffers});   
+    }
+    case USER_LOGGING:{
+      const user=action.payload;
+      return Object.assign({},state,{user});
     }
     default:
         return state

@@ -9,13 +9,12 @@ class OfferEdit extends React.Component {
     super(props);
     
     this.state = {
-      authorId: this.props.offer.authorId,
       title: this.props.offer.title,
-      startDateTime: this.props.offer.startDateTime,
-      endDateTime: this.props.offer.endDateTime,
+      start_date_time: this.props.offer.start_date_time,
+      end_date_time: this.props.offer.end_date_time,
       description: this.props.offer.description,
       photo: this.props.offer.photo,
-      roomNumber: this.props.offer.roomNumber,
+      room_number: this.props.offer.room_number,
       beds: this.props.offer.beds,
       price: this.props.offer.price,
       rating: this.props.offer.rating,
@@ -33,12 +32,19 @@ class OfferEdit extends React.Component {
     this.priceChanged = this.priceChanged.bind(this);
     this.bedsChanged = this.bedsChanged.bind(this);
     this.titleChanged = this.titleChanged.bind(this);
+    this.photoChanged = this.photoChanged.bind(this);
+    this.startDateChanged = this.startDateChanged.bind(this);
+    this.endDateChanged = this.endDateChanged.bind(this);
     this.editOffer = this.editOffer.bind(this);
 
   }
 
   descriptionChanged(e) {
     this.setState({ description: e.target.value });
+  }
+
+  photoChanged(e){
+    console.log(e.target.value);
   }
 
   titleChanged(e) {
@@ -58,7 +64,7 @@ class OfferEdit extends React.Component {
   }
 
   roomNumberChanged(e) {
-    this.setState({ roomNumber: Number(e.target.value) });
+    this.setState({ room_number: Number(e.target.value) });
   }
 
   priceChanged(e) {
@@ -69,17 +75,26 @@ class OfferEdit extends React.Component {
     this.setState({ beds: Number(e.target.value) });
   }
 
+  startDateChanged(e){
+    var date = getParsedDate(new Date(e.target.value).toLocaleDateString());
+    this.setState({start_date_time: date})
+  }
+
+  endDateChanged(e){
+    var date = getParsedDate(new Date(e.target.value).toLocaleDateString());
+    this.setState({end_date_time: date})
+  }
+
   editOffer (e) {
-    console.log('hey');
+    e.preventDefault();
     this.setState({ isSaving: true });  
     const {
-      authorId,
       title,
-      startDateTime,
-      endDateTime,
+      start_date_time,
+      end_date_time,
       description,
       photo,
-      roomNumber,
+      room_number,
       beds,
       price,
       rating,
@@ -89,21 +104,18 @@ class OfferEdit extends React.Component {
     } = this.state;
 
     const offer = {
-      authorId,
-      title,
-      startDateTime,
-      endDateTime,
-      description,
-      photo,
-      roomNumber,
-      beds,
-      price,
-      rating,
-      city,
-      address,
-      country
+      "start_date_time": start_date_time,
+      "end_date_time": end_date_time,
+      "title": title,
+      "description": description,
+      "room_number": room_number,
+      "beds": beds,
+      "price": price,
+      "rating": rating,
+      "city": city,
+      "address": address,
+      "country": country
     };
-    console.log(JSON.stringify(offer));
     fetch('http://localhost:3004/offers', {
       method: 'POST', 
       headers: {
@@ -125,8 +137,10 @@ class OfferEdit extends React.Component {
   render() {
     const {
       title,
+      start_date_time,
+      end_date_time,
       description,
-      roomNumber,
+      room_number,
       beds,
       price,
       city,
@@ -134,12 +148,11 @@ class OfferEdit extends React.Component {
       country,
       isSaving,
     } = this.state;
-
+    console.log(start_date_time);
     return (
       <div align="center">
-        <div className="bg" style={{width: '650px'}}>
-          <div align="left" style={{width: '500px', position: 'relative'}}>
-            <h1 align="center">Update data:</h1>                
+        <div align="left" style={{width: '650px'}}>
+          <div align="center" style={{width: '600px'}}>              
             <form onSubmit={(e)=>this.editOffer(e)}>
                 <div className="grid-container">
                   <div><label htmlFor="title" className="label-text">Title : </label></div>
@@ -166,7 +179,7 @@ class OfferEdit extends React.Component {
                   <div><input className="input-transfer-data form-control" name="address" id="address" value={address} onChange={this.addressChanged} disabled={isSaving} /></div>
                   
                   <div><label className="label-text">Room Number : </label></div>
-                  <div><input className="input-transfer-data form-control" type="number" step="1" min="1" value={roomNumber} onChange={this.roomNumberChanged} disabled={isSaving} /></div>
+                  <div><input className="input-transfer-data form-control" type="number" step="1" min="1" value={room_number} onChange={this.roomNumberChanged} disabled={isSaving} /></div>
 
                   <div><label className="label-text">Number of beds : </label></div>
                   <div><input className="input-transfer-data form-control" type="number" step="1" min="1" value={beds} onChange={this.bedsChanged} disabled={isSaving} /></div>
@@ -177,12 +190,18 @@ class OfferEdit extends React.Component {
                   <div><label className="label-text">Photo : </label></div>
                   <div><input className="input-transfer-data btn btn-light" type="file" accept="image/png, image/jpeg" disabled={isSaving}/></div>
                   
+                  <div><label className="label-text">Date From : </label></div>
+                  <div><input className="input-transfer-data form-control" type="date" value={start_date_time} onChange={this.startDateChanged} disabled={isSaving}/></div>
+                  
+                  <div><label className="label-text">Date To : </label></div>
+                  <div><input className="input-transfer-data form-control" type="date"  value={end_date_time} onChange={this.endDateChanged} min={start_date_time} disabled={isSaving}/></div>
+                  
 
                   <div><label htmlFor="description" className="label-text">Description : </label></div>
                   <div><textarea id="description" className="input-transfer-data form-control" name="description" value={description} onChange={this.descriptionChanged} disabled={isSaving}></textarea></div>
                 </div>
                 <br />
-                <Button align="right" variant="outline-success" type="submit">{!isSaving ? <span>Update</span> : <span>Saving ...</span>}</Button>
+                <Button variant="outline-success" type="submit">{!isSaving ? <span>Update</span> : <span>Updating ...</span>}</Button>
                 <Button variant="outline-warning" onClick={() => this.props.cancelUpdate()} >Cancel</Button> 
             </form>
             <br />
@@ -193,12 +212,21 @@ class OfferEdit extends React.Component {
   }
 }
 const mapStateToProps = (state) => {
-    return {     
-    };
+  return {     
   };
-  
-  const mapDispatchToProps = dispatch => ({
-    offerEdit: offer => dispatch(offerEdit(offer))
-  });
+};
+
+const mapDispatchToProps = dispatch => ({
+  offerEdit: offer => dispatch(offerEdit(offer))
+});
+
+function getParsedDate(strDate){
+  var datesplit = strDate.split('.');
+  if (datesplit[0] < 10) {
+    datesplit[0] = '0' + datesplit[0];
+  }
+  var date =  datesplit[2] + "-" + datesplit[1] + "-" + datesplit[0];
+  return date.toString();
+}
   
   export default connect(mapStateToProps, mapDispatchToProps) (withRouter(OfferEdit));

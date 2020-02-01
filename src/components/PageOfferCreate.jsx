@@ -9,13 +9,12 @@ class PageOfferCreate extends React.Component {
     super(props);
     
     this.state = {
-      authorId:'',
       title: '',
-      startDateTime: '',
-      endDateTime: '',
+      start_date_time: getParsedDate(new Date().toLocaleDateString()),
+      end_date_time: getParsedDate(new Date().toLocaleDateString()),
       description: '',
       photo: '',
-      roomNumber: 1,
+      room_number: 1,
       beds: 1,
       price: 10,
       rating: 0,
@@ -34,12 +33,19 @@ class PageOfferCreate extends React.Component {
     this.priceChanged = this.priceChanged.bind(this);
     this.bedsChanged = this.bedsChanged.bind(this);
     this.titleChanged = this.titleChanged.bind(this);
+    this.photoChanged = this.photoChanged.bind(this);
+    this.startDateChanged = this.startDateChanged.bind(this);
+    this.endDateChanged = this.endDateChanged.bind(this);
     this.createOffer = this.createOffer.bind(this);
 
   }
 
   descriptionChanged(e) {
     this.setState({ description: e.target.value });
+  }
+
+  photoChanged(e){
+    console.log(e.target.value);
   }
 
   titleChanged(e) {
@@ -59,11 +65,20 @@ class PageOfferCreate extends React.Component {
   }
 
   roomNumberChanged(e) {
-    this.setState({ roomNumber: Number(e.target.value) });
+    this.setState({ room_number: Number(e.target.value) });
   }
 
   priceChanged(e) {
     this.setState({ price: Number(e.target.value) });
+  }
+
+  startDateChanged(e){
+    var date = getParsedDate(new Date(e.target.value).toLocaleDateString());
+    this.setState({start_date_time: date})
+  }
+  endDateChanged(e){
+    var date = getParsedDate(new Date(e.target.value).toLocaleDateString());
+    this.setState({end_date_time: date})
   }
 
   bedsChanged(e) {
@@ -72,16 +87,14 @@ class PageOfferCreate extends React.Component {
 
   createOffer (e) {
     e.preventDefault();
-    console.log('hey');
     this.setState({ isSaving: true });  
     const {
-      authorId,
       title,
-      startDateTime,
-      endDateTime,
+      start_date_time,
+      end_date_time,
       description,
       photo,
-      roomNumber,
+      room_number,
       beds,
       price,
       rating,
@@ -89,28 +102,26 @@ class PageOfferCreate extends React.Component {
       address,
       country
     } = this.state;
-
-    const offer = {
-      authorId,
-      title,
-      startDateTime,
-      endDateTime,
-      description,
-      photo,
-      roomNumber,
-      beds,
-      price,
-      rating,
-      city,
-      address,
-      country
+     
+    var offer = {
+      "start_date_time": start_date_time,
+      "end_date_time": end_date_time,
+      "title": title,
+      "description": description,
+      "room_number": room_number,
+      "beds": beds,
+      "price": price,
+      "rating": rating,
+      "city": city,
+      "address": address,
+      "country": country
     };
-    console.log(JSON.stringify(offer));
-    fetch('http://localhost:3004/offers', {
+    fetch('http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items', {
       method: 'POST', 
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'securityTokenValue': "9fcbf4ff-5ea9-4027-ba82-5a7a7c59c156"
       },
       body: JSON.stringify(offer)
     })
@@ -127,8 +138,10 @@ class PageOfferCreate extends React.Component {
   render() {
     const {
       title,
+      start_date_time,
+      end_date_time,
       description,
-      roomNumber,
+      room_number,
       beds,
       price,
       city,
@@ -168,7 +181,7 @@ class PageOfferCreate extends React.Component {
                   <div><input className="input-transfer-data form-control" name="address" id="address" value={address} onChange={this.addressChanged} disabled={isSaving} /></div>
                   
                   <div><label className="label-text">Room Number : </label></div>
-                  <div><input className="input-transfer-data form-control" type="number" step="1" min="1" value={roomNumber} onChange={this.roomNumberChanged} disabled={isSaving} /></div>
+                  <div><input className="input-transfer-data form-control" type="number" step="1" min="1" value={room_number} onChange={this.roomNumberChanged} disabled={isSaving} /></div>
 
                   <div><label className="label-text">Number of beds : </label></div>
                   <div><input className="input-transfer-data form-control" type="number" step="1" min="1" value={beds} onChange={this.bedsChanged} disabled={isSaving} /></div>
@@ -177,15 +190,22 @@ class PageOfferCreate extends React.Component {
                   <div><input className="input-transfer-data form-control" type="number" step="1" min="10" value={price} onChange={this.priceChanged} disabled={isSaving} /></div>
                   
                   <div><label className="label-text">Photo : </label></div>
-                  <div><input className="input-transfer-data btn btn-light" type="file" accept="image/png, image/jpeg" disabled={isSaving}/></div>
+                  <div><input className="input-transfer-data btn btn-light" type="file" accept="image/png, image/jpeg" onChange={this.photoChanged} disabled={isSaving}/></div>
+
+                  <div><label className="label-text">Date From : </label></div>
+                  <div><input className="input-transfer-data form-control" type="date" value={start_date_time} onChange={this.startDateChanged} disabled={isSaving}/></div>
+                  
+                  <div><label className="label-text">Date To : </label></div>
+                  <div><input className="input-transfer-data form-control" type="date"  value={end_date_time} onChange={this.endDateChanged} min={start_date_time} disabled={isSaving}/></div>
                   
 
                   <div><label htmlFor="description" className="label-text">Description : </label></div>
 		              <div><textarea id="description" className="input-transfer-data form-control" name="description" value={description} onChange={this.descriptionChanged} disabled={isSaving}></textarea></div>
                 </div>
                 <br />
-                <Button variant="outline-success" type="submit">{!isSaving ? <span>Create offer</span> : <span>Saving ...</span>}</Button>
-                <Button variant="outline-warning" onClick={() => this.props.history.push("/list")} >Cancel</Button> 
+                <Button variant="success" type="submit">{!isSaving ? <span>Create offer</span> : <span>Saving ...</span>}</Button>
+                &nbsp;
+                <Button variant="warning" onClick={() => this.props.history.push("/list")} >Cancel</Button> 
             </form>
             <br />
           </div>
@@ -204,5 +224,15 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => ({
   offerAdd: newoffer => dispatch(offerAdd(newoffer))
 });
+
+function getParsedDate(strDate){
+  var datesplit = strDate.split('.');
+  //var date = new Date(strSplitDate[0]);
+  if (datesplit[0] < 10) {
+    datesplit[0] = '0' + datesplit[0];
+  }
+  var date =  datesplit[2] + "-" + datesplit[1] + "-" + datesplit[0];
+  return date.toString();
+}
 
 export default connect(mapStateToProps, mapDispatchToProps) (withRouter(PageOfferCreate));

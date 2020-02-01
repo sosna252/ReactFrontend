@@ -54,7 +54,7 @@ class Offer extends React.Component {
                         </div>
                         <div style={{textAlign: "center", padding: '2px'}}>
                             <p><strong>Description : </strong></p>
-                            <span> {this.props.offer.description}{this.props.offer.description}{this.props.offer.description}{this.props.offer.description}{this.props.offer.description}{this.props.offer.description}{this.props.offer.description}{this.props.offer.description}{this.props.offer.description} </span>
+                            <span> {this.props.offer.description} </span>
                         </div>
                     </div>
                     :

@@ -128,7 +128,10 @@ class PageOffersList extends React.Component {
             </div>
           </div>
           {loading ?
-            <p style={{clear:'left'}}>Loading ...</p>
+            <div>
+              <p style={{clear:'left'}}>Loading ...</p>
+              <br />
+            </div>            
             :
             <div style={{clear:'left'}}>
               {offers && offers.map((offer => 

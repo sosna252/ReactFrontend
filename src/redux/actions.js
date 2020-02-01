@@ -1,4 +1,4 @@
-import { OFFERS_LOADED, OFFER_ADD,OFFERS_LOADING,OFFERS_ERROR,OFFER_DELETE,OFFER_EDIT} from './constants';
+import { OFFERS_LOADED, OFFER_ADD,OFFERS_LOADING,OFFERS_ERROR,OFFER_DELETE,OFFER_EDIT, USER_LOGGING} from './constants';
 
 export const offersLoaded = (offers) => {
   return {
@@ -44,6 +44,12 @@ export const offersLoadingError=(error)=>{
 export const offersLoadingOffers=()=>{
   return{
     type: OFFERS_LOADING
+  }
+}
+export const UserLogging=(user)=>{
+  return{
+    type: USER_LOGGING,
+    payload: user
   }
 }
   

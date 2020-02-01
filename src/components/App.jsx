@@ -10,7 +10,7 @@ import { createStore, applyMiddleware } from 'redux'
 import rootReducer from '../redux/reducers'
 import reduxThunk from 'redux-thunk'
 import reduxLogger from 'redux-logger'
-
+import PageLogin from './PageLogin';
 import PageOffersList from './PageOffersList';
 import PageOfferCreate from './PageOfferCreate';
 import AppHeader from './Header'
@@ -26,13 +26,13 @@ const App = () => (
       <hr />      
       <div className="up" style={{position:'relative', width: '1004px', margin: 'auto'}}></div>
       <Switch>
+      <Route exact path="/">
+          <PageLogin></PageLogin>
+        </Route>
         <Route exact path="/list">
           <PageOffersList></PageOffersList>
         </Route>
         <Route exact path="/new">
-          <PageOfferCreate></PageOfferCreate>
-        </Route>
-        <Route exact path="/edit">
           <PageOfferCreate></PageOfferCreate>
         </Route>
       </Switch>
@@ -40,7 +40,7 @@ const App = () => (
       <div className="down" style={{position:'relative', width: '1004px', margin: 'auto'}} />
       <div id="copyright">
 					&copy; 2020, <strong>React</strong> created by <em>Flatly</em>
-				</div>
+			</div>
     </Router>
   </Provider>
 )
