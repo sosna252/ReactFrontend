@@ -108,11 +108,11 @@ class PageOffersList extends React.Component {
               <div style={{position: 'absolute', left: '50%'}}><Button variant="outline-info" size="sm" className="rounded-circle" onClick={this.changeVisibility}>Filtr</Button></div>}
             {this.state.filtr ? <div><br /><br /> </div>: <br />}
             <div style={{float: 'left', width: '30%'}}>
-              <h1 >Offers List:</h1>
+              <h1 >Offers List :</h1>
             </div>
             <div style={{ float: 'left', position: 'relative', width: '70%', height: '80px'}}>
-              <div style={{ position:'absolute', right: '2px', bottom:'5px' }}>
-                <select>
+              <div align="right" style={{ clear:"left",right:'3px', position:'absolute', bottom:'5px',width:'25%'}}>
+                <select className="form-control form-control-sm" style={{width:"70%",float: 'left'}}>
                   <option>Price high</option>
                   <option>Price low</option>
                   <option>Date low</option>
@@ -122,7 +122,6 @@ class PageOffersList extends React.Component {
                   <option>Date low</option>
                   <option>Date high</option>
                 </select>
-                &nbsp;
                 <Button className="rounded-pill" variant="outline-dark" size="sm">Sort</Button>
               </div>          
             </div>

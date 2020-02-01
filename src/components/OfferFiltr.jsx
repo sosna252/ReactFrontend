@@ -25,17 +25,17 @@ class OfferFiltr extends React.Component {
         text
       } = this.state;
     return (
-      <div>
-        <input value={text} placeholder="Write something" onChange={this.textChange}></input>
-        <select value={filtr} onChange={this.filtrChanged}>
+      <div align="center" style={{ width:'250px'}}>
+        <input className="form-control form-control-sm" value={text} placeholder="Write something" onChange={this.textChange} style={{  borderRadius: '10px', float:'left', width:'70%'}}></input>
+        <select className="form-control form-control-sm" value={filtr} onChange={this.filtrChanged} style={{width:'28%', borderRadius: '10px', marginBottom:'2px'}}>
             <option value="Price">Price</option>
             <option value="endDate">Ends</option>
             <option value="startDate">Start</option>
             <option value="City">City</option>
           </select>
-          <br />
-        <Button variant="success" size="sm" onClick={() => {this.props.changeVisibility()}}>Filtr</Button>
-        <Button variant="warning" size="sm" onClick={() => {this.props.changeVisibility()}}>Cancel</Button>
+        <Button className="rounded-pill" variant="success" size="sm" onClick={() => {this.props.changeVisibility()}}>Filtr</Button>
+        &nbsp;
+        <Button className="rounded-pill" variant="warning" size="sm" onClick={() => {this.props.changeVisibility()}}>Cancel</Button>
       </div>
     );
   }

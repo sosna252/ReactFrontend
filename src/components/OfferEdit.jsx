@@ -148,7 +148,6 @@ class OfferEdit extends React.Component {
       country,
       isSaving,
     } = this.state;
-    console.log(start_date_time);
     return (
       <div align="center">
         <div align="left" style={{width: '650px'}}>
@@ -202,6 +201,7 @@ class OfferEdit extends React.Component {
                 </div>
                 <br />
                 <Button variant="outline-success" type="submit">{!isSaving ? <span>Update</span> : <span>Updating ...</span>}</Button>
+                &nbsp;
                 <Button variant="outline-warning" onClick={() => this.props.cancelUpdate()} >Cancel</Button> 
             </form>
             <br />

@@ -1,7 +1,8 @@
 body, html {
   height: 100%;
-  background-image: url('background.jpg');
-  background-repeat: no-repeat;
+  background: rgba(247,234,212,0.95);
+  background: linear-gradient(135deg, rgba(247,234,212,0.95) 0%, rgba(232,189,115,0.96) 25%, rgba(223,155,38,0.96) 53%, rgba(242,208,114,0.97) 82%, rgba(241,218,177,0.97) 100%);
+
   background-position: top;  
   font-family: Calibri,Tahoma, Arial;	
 	font-style: italic;
