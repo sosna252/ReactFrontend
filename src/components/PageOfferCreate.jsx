@@ -126,11 +126,13 @@ class PageOfferCreate extends React.Component {
       body: JSON.stringify(offer)
     })
     .then(res => {
-      if(res.status !== 201) {
+      if(res.status !== 200) {
         this.setState({ isSaving: false, error: `Saving returned status ${res.status}`})
+        alert("Something wrong");
       } else {
+        console.log(res.body)
         this.props.offerAdd(offer);
-        this.props.history.push("/list");
+        //this.props.history.push("/list");
       }
     })  
   }

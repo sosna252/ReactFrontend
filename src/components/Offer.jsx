@@ -42,11 +42,11 @@ class Offer extends React.Component {
                             <p style={{marginLeft: "10px"}}>><strong>Country :</strong> {this.props.offer.country} </p>
                             <p style={{marginLeft: "10px"}}>><strong>City : </strong> {this.props.offer.city} </p>
                             <p style={{marginLeft: "10px"}}>><strong>Address : </strong> {this.props.offer.address} </p>
-                            <p style={{marginLeft: "10px"}}>><strong>Room Number : </strong> {this.props.offer.roomNumber} </p>  
+                            <p style={{marginLeft: "10px"}}>><strong>Room Number : </strong> {this.props.offer.room_number} </p>  
                         </div>
                         <div style={{position: 'absolute', right: '5%', top: '0px'}}> 
-                            <p><strong>Start Date : </strong> {this.props.offer.startDateTime} </p>
-                            <p><strong>End Date : </strong> {this.props.offer.endDateTime} </p>
+                            <p><strong>Start Date : </strong> {this.props.offer.start_date_time} </p>
+                            <p><strong>End Date : </strong> {this.props.offer.end_date_time} </p>
                             <p style={{textAlign: 'right', marginRight:'80px'}}><strong>Rating :</strong> 
                                 <br />
                                 <p style={{textAlign: "right", marginRight:'25px'}}>{this.props.offer.price}</p> 

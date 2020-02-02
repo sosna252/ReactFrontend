@@ -36,8 +36,13 @@ class PageOffersList extends React.Component {
   }
 
   deleteOffer = (e,id) => {
-    fetch('http://localhost:3004/offers/'+id, {
-    method: 'DELETE'
+    fetch('http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/item/'+id, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'securityTokenValue': "9fcbf4ff-5ea9-4027-ba82-5a7a7c59c156"
+    }
     })
     .then( ()=> {            
           this.props.offerDelete(id);
@@ -67,13 +72,13 @@ class PageOffersList extends React.Component {
     PopupboxManager.close();
   }
   Update() {
-    loadOffers();
+    this.props.loadOffers();
     PopupboxManager.close();
   }
 
   editOffer(offer) {
     const content = (
-      <OfferEdit offer={offer} cancelUpdate={this.cancelUpdate} Update={this.Update} />
+      <OfferEdit offer={offer} cancelUpdate={this.cancelUpdate} Update={this.Update} deleteOffer={this.deleteOffer} />
     )
     PopupboxManager.open({
       content,

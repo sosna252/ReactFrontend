@@ -16,7 +16,7 @@ export const offerAdd = (newoffer)=>{
     }
   }
 }
-export const offerEfit = (offer)=>{
+export const offerEdit = (offer)=>{
   return{
     type: OFFER_EDIT,
     payload:{
@@ -58,7 +58,14 @@ export const UserLogging=(user)=>{
 export const loadOffers=()=>{
   return(dispatch)=>{
     dispatch(offersLoadingOffers())
-    fetch('http://localhost:3004/offers')
+    fetch('http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items', {
+      method: 'GET', 
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'securityTokenValue': "9fcbf4ff-5ea9-4027-ba82-5a7a7c59c156"
+      }
+    })
     .then((data) => data.json())
     .then(
     (offers) => dispatch(offersLoaded(offers)),

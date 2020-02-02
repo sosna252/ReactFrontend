@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { offerEdit } from '../redux/actions'
+import { offerAdd } from '../redux/actions'
 import Button from 'react-bootstrap/Button';
 
 class OfferEdit extends React.Component {
@@ -116,19 +116,23 @@ class OfferEdit extends React.Component {
       "address": address,
       "country": country
     };
-    fetch('http://localhost:3004/offers', {
+    this.props.deleteOffer(e,this.props.offer.id);
+    fetch('http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items', {
       method: 'POST', 
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'securityTokenValue': "9fcbf4ff-5ea9-4027-ba82-5a7a7c59c156"
       },
       body: JSON.stringify(offer)
     })
     .then(res => {
-      if(res.status !== 201) {
+      if(res.status !== 200) {
         this.setState({ isSaving: false, error: `Saving returned status ${res.status}`})
+        alert("Something wrong");
       } else {
-        this.props.offerEdit(offer);
+        //console.log('hi')
+        this.props.offerAdd(offer);
         this.props.Update();
       }
     })  
@@ -217,7 +221,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  offerEdit: offer => dispatch(offerEdit(offer))
+  offerAdd: offer => dispatch(offerAdd(offer))
 });
 
 function getParsedDate(strDate){
