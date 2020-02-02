@@ -55,7 +55,7 @@ class PageOffersList extends React.Component {
   }
 
   openPopupbox = (photo) => {
-    const content = <img src={photo} style={{width:'90%', heigh:'90%'}}/>
+    const content = <img  src={`http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/itemphoto/`+photo} style={{width:'90%', heigh:'90%'}}/>
     PopupboxManager.open({
       content,
       config: {

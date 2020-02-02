@@ -13,7 +13,7 @@ class PageOfferCreate extends React.Component {
       start_date_time: getParsedDate(new Date().toLocaleDateString()),
       end_date_time: getParsedDate(new Date().toLocaleDateString()),
       description: '',
-      photo: '',
+      photo: null,
       room_number: 1,
       beds: 1,
       price: 10,
@@ -45,7 +45,8 @@ class PageOfferCreate extends React.Component {
   }
 
   photoChanged(e){
-    console.log(e.target.value);
+    this.setState({photo: e.target.files[0]})
+
   }
 
   titleChanged(e) {
@@ -102,7 +103,7 @@ class PageOfferCreate extends React.Component {
       address,
       country
     } = this.state;
-     
+    
     var offer = {
       "start_date_time": start_date_time,
       "end_date_time": end_date_time,
@@ -125,16 +126,38 @@ class PageOfferCreate extends React.Component {
       },
       body: JSON.stringify(offer)
     })
+    .then((response) => response.json())
     .then(res => {
-      if(res.status !== 200) {
-        this.setState({ isSaving: false, error: `Saving returned status ${res.status}`})
-        alert("Something wrong");
-      } else {
-        console.log(res.body)
+      //if(res.status !== 200) {
+        //this.setState({ isSaving: false, error: `Saving returned status ${res.status}`})
+        //alert("Something wrong");
+      //} else {
+        this.addPhoto(res.id);
         this.props.offerAdd(offer);
         //this.props.history.push("/list");
-      }
+      //}
+    })
+  }
+  addPhoto(id){
+    console.log(this.state.photo)
+    fetch('http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/'+id+'/itemphoto', {
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'image/jpeg',
+        'securityTokenValue': "9fcbf4ff-5ea9-4027-ba82-5a7a7c59c156"
+      },
+      body: this.state.photo
+    })
+    .then(res => {
+      console.log(res);
+      //if(res.status !== 200) {
+        //this.setState({ isSaving: false, error: `Saving returned status ${res.status}`})
+        //alert("Something wrong");
+      //} else {
+        //this.props.history.push("/list");
+      //}
     })  
+    
   }
 
   render() {
@@ -229,7 +252,6 @@ const mapDispatchToProps = dispatch => ({
 
 function getParsedDate(strDate){
   var datesplit = strDate.split('.');
-  //var date = new Date(strSplitDate[0]);
   if (datesplit[0] < 10) {
     datesplit[0] = '0' + datesplit[0];
   }
