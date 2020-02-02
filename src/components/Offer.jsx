@@ -1,5 +1,4 @@
 import React from 'react'
-import photo from '../IMG/photo.jpg'
 import Button from 'react-bootstrap/Button';
 
 class Offer extends React.Component {
@@ -19,12 +18,12 @@ class Offer extends React.Component {
             <div  style={{ clear: 'left', marginBottom:'2px'}} >
                 <div className="off" style={{border:'outset grey', padding:'0.5px', position:'relative',height:'110px', width:'944px', textAlign:'justify'}} onClick={()=> {this.detailsVisible()}}>
                     <div style={{width:'15%', float:'left', height:"100%"}}>
-                        <img src={`http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/itemphoto/`+ this.props.offer.id} onClick={() => {this.props.openPopupbox(this.props.offer.id)}} style={{width:'100%', height:"100%", borderRadius: '5px 0px 0px 5px'}} />
+                        <img src={'http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/itemphoto/'+ this.props.offer.id} onClick={() => {this.props.openPopupbox(this.props.offer.id)}} style={{width:'100%', height:"100%", borderRadius: '5px 0px 0px 5px'}} />
                     </div>
                     <div style={{width:'80%', float:'left'}}>                        
                         <p style={{textAlign: "center"}}><strong>Title :</strong> {this.props.offer.title}</p>
                         <p style={{marginLeft: "10px"}}>><strong>Guest :</strong> {this.props.offer.beds}</p>
-                        <p style={{marginLeft: "10px"}}>><strong>Date :</strong> {this.props.offer.endDateTime}</p>                        
+                        <p style={{marginLeft: "10px"}}>><strong>Date :</strong> {this.props.offer.end_date_time}</p>                        
                     </div>
                     <div style={{position:'absolute', right:'3%'}}>
                         <p style={{marginTop: "15px"}}><strong>Price per day :</strong>
@@ -44,7 +43,7 @@ class Offer extends React.Component {
                             <p style={{marginLeft: "10px"}}>><strong>Address : </strong> {this.props.offer.address} </p>
                             <p style={{marginLeft: "10px"}}>><strong>Room Number : </strong> {this.props.offer.room_number} </p>  
                         </div>
-                        <div style={{position: 'absolute', right: '5%', top: '0px'}}> 
+                        <div style={{position: 'absolute', right: '5%', top: '8px'}}> 
                             <p><strong>Start Date : </strong> {this.props.offer.start_date_time} </p>
                             <p><strong>End Date : </strong> {this.props.offer.end_date_time} </p>
                             <p style={{textAlign: 'right', marginRight:'80px'}}><strong>Rating :</strong> 

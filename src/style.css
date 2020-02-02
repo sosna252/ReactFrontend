@@ -9,22 +9,21 @@ body, html {
   
 }
 .bg {
-  background-image: url('srodkowa_czesc_zawartosci.gif');
+  background-image: url('IMG/srodkowa_czesc_zawartosci.gif');
   background-repeat: repeat;
 }
 .up{
-  background-image: url('gorna_czesc_zawartosci.gif');
+  background-image: url('IMG/gorna_czesc_zawartosci.gif');
   height: 17px;
   width: 1004px;
-  background-color: rosybrown;
 }
 .foot{
-  background-image: url('dolna_czesc_zawartosci.gif');
+  background-image: url('IMG/dolna_czesc_zawartosci.gif');
   height: 31px;
   width: 1004px;
 }
 .down{
-  background-image: url('dol.gif');
+  background-image: url('IMG/dol.gif');
   height: 10px;
   width: 1004px;
 }
