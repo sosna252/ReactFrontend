@@ -134,9 +134,10 @@ class PageOfferCreate extends React.Component {
       //} else {
         this.addPhoto(res.id);
         this.props.offerAdd(offer);
-        //this.props.history.push("/list");
+        
       //}
     })
+    this.props.history.push("/list");
   }
   addPhoto(id){
     console.log(this.state.photo)

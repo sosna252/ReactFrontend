@@ -14,6 +14,7 @@ class Offer extends React.Component {
     }
     
     render(){
+        console.log(this.props.id)
        return(
             <div  style={{ clear: 'left', marginBottom:'2px'}} >
                 <div className="off" style={{border:'outset grey', padding:'0.5px', position:'relative',height:'110px', width:'944px', textAlign:'justify'}} onClick={()=> {this.detailsVisible()}}>
