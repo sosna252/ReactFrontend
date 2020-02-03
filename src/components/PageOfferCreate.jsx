@@ -45,8 +45,7 @@ class PageOfferCreate extends React.Component {
   }
 
   photoChanged(e){
-    this.setState({photo: e.target.files[0]})
-
+    this.setState({photo: e.target.files[0]});
   }
 
   titleChanged(e) {
