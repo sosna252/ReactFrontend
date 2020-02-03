@@ -8,21 +8,21 @@ body, html {
 	font-style: italic;
 }
 .bg {
-  background-image: url('../src/Img/srodkowa_czesc_zawartosci.gif');
+  background-image: url('./Img/srodkowa_czesc_zawartosci.gif');
   background-repeat: repeat;
 }
 .up{
-  background-image: url('../src/Img/gorna_czesc_zawartosci.gif');
+  background-image: url('./Img/gorna_czesc_zawartosci.gif');
   height: 17px;
   width: 1004px;
 }
 .foot{
-  background-image: url('../src/Img/dolna_czesc_zawartosci.gif');
+  background-image: url('./Img/dolna_czesc_zawartosci.gif');
   height: 31px;
   width: 1004px;
 }
 .down{
-  background-image: url('../src/Img/dol.gif');
+  background-image: url('./Img/dol.gif');
   height: 10px;
   width: 1004px;
 }
