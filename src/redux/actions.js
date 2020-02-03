@@ -95,7 +95,7 @@ export const sortOffers=(sort,desc)=>{
     var tmp = 'http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items?sort='+sort;
     if(desc)
     {
-      tmp= tmp + '&dir='+desc;
+      tmp= tmp + '&dir=desc';
     }
     fetch(tmp, {
       method: 'GET', 
