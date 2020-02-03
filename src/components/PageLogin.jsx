@@ -40,13 +40,12 @@ class PageLogin extends React.Component {
             body: JSON.stringify(user)
         })
         .then((response) => response.json())
-        .then(res => {
-            
+        .then(res => {            
             if(res.message) {
                alert(`${res.message}`);
             }
             else {
-                console.log(res)
+            console.log(res)
             //this.props.UserLogging(user);
             //console.log(user);
            // this.props.history.push("/list");

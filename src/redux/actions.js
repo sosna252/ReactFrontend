@@ -16,6 +16,14 @@ export const offersFiltred = (offers) => {
     }
   };
 }
+export const offersSorted = (offers) => {
+  return {
+    type: OFFERS_LOADED,
+    payload: {
+      offers
+    }
+  };
+}
 export const offerAdd = (newoffer)=>{
   return{
     type: OFFER_ADD,
@@ -81,10 +89,22 @@ export const loadOffers=()=>{
     );
   };
 }
-export const sortOffers=()=>{
+export const sortOffers=(sort,desc)=>{
   return(dispatch)=>{
     dispatch(offersLoadingOffers())
-    fetch('http://localhost:3004/offers')
+    var tmp = 'http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items?sort='+sort;
+    if(desc)
+    {
+      tmp= tmp + '&dir='+desc;
+    }
+    fetch(tmp, {
+      method: 'GET', 
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'securityTokenValue': "9fcbf4ff-5ea9-4027-ba82-5a7a7c59c156"
+      }
+    })
     .then((data) => data.json())
     .then(
     (offers) => dispatch(offersSorted(offers)),
@@ -102,7 +122,7 @@ export const filtrOffers=(filtr,city,people,From,To)=>{
     }
     else if(filtr==="people")
     {
-      tmp = 'http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items?people=1';
+      tmp = 'http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items?people='+people;
     }
     else if(filtr==="date")
     {

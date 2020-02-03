@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loadOffers, filtrOffers } from '../redux/actions';
+import { loadOffers, filtrOffers, sortOffers } from '../redux/actions';
 import Offer from './Offer';
 import OfferEdit from './OfferEdit'
 import OfferFiltr from './OfferFiltr';
@@ -21,9 +21,10 @@ class PageOffersList extends React.Component {
     this.state ={
       filtrVisible: false,
       filtrText: "",
-      sortText: "",
+      sortText: "-",
       filtred: false,
       sorted: false,
+      desc: false,
     }
     this.changeVisibility = this.changeVisibility.bind(this);
     this.openPopupbox = this.openPopupbox.bind(this);
@@ -31,6 +32,9 @@ class PageOffersList extends React.Component {
     this.cancelUpdate = this.cancelUpdate.bind(this);
     this.Update = this.Update.bind(this);
     this.handleFiltred = this.handleFiltred.bind(this);
+    this.descChange = this.descChange.bind(this);
+    this.sortChange= this.sortChange.bind(this);
+    this.SortHandle = this.SortHandle.bind(this);
   }
 
   componentDidMount() {
@@ -53,6 +57,22 @@ class PageOffersList extends React.Component {
           this.props.offerDelete(id);
           this.props.loadOffers();
       })  
+  }
+
+  descChange(){
+    this.setState({desc: !this.state.desc})
+  }
+  sortChange(e){
+    this.setState({sortText: e.target.value})
+  }
+  SortHandle(){
+    if(this.state.sortText==='-')
+    {
+      this.props.loadOffers();
+    }
+    console.log(this.state.desc)
+    this.props.sortOffers(this.state.sortText, this.state.desc);
+
   }
 
   changeVisibility(){
@@ -141,17 +161,14 @@ class PageOffersList extends React.Component {
             </div>
             <div style={{ float: 'left', position: 'relative', width: '70%', height: '80px'}}>
               <div align="right" style={{ clear:"left",right:'3px', position:'absolute', bottom:'5px',width:'25%'}}>
-                <select className="form-control form-control-sm" style={{width:"70%",float: 'left'}}>
-                  <option>Price high</option>
-                  <option>Price low</option>
-                  <option>Date low</option>
-                  <option>Date high</option>
-                  <option>Price high</option>
-                  <option>Price low</option>
-                  <option>Date low</option>
-                  <option>Date high</option>
+                <select className="form-control form-control-sm" style={{width:"70%",float: 'left'}} onChange={this.sortChange}>
+                  <option value="none"> - </option>
+                  <option value="price">Price </option>
+                  <option value="date">Date </option>
+                  <option value="rate">Rate</option>
                 </select>
-                <Button className="rounded-pill" variant="outline-dark" size="sm">Sort</Button>
+                <Button className="rounded-pill" variant="outline-dark" size="sm" onClick={this.SortHandle}>Sort</Button>
+                <p style={{ float:"left"}}>Desc:</p> <input type="checkbox" onChange={this.descChange}></input>
               </div>          
             </div>
           </div>
@@ -198,6 +215,8 @@ const mapDispatchToProps = (dispatch) => ({
  loadOffers: ()=> dispatch(loadOffers()),
  offerDelete: id => dispatch(offerDelete(id)),
  filtrOffers: (filtr,city,people,From,To)=>dispatch(filtrOffers(filtr,city,people,From,To)),
+ sortOffers: (sort,desc) => dispatch(sortOffers(sort,desc)),
+
 })
 
 export default connect(

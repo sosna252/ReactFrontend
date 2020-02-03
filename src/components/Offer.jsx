@@ -36,7 +36,7 @@ class Offer extends React.Component {
                     <Button className="rounded-pill shadow" variant="outline-primary" size="sm" style={{position:'absolute', right:'80px', bottom:'5px'}} onClick={() => {this.props.editOffer(this.props.offer)}}> Edit </Button>
                 </div>
                 {this.state.details ?
-                    <div style={{borderStyle:'none outset outset outset',borderColor: 'grey', padding:'0.5px', position:'relative', position: 'relative', width:'944px', textAlign:'justify'}}>
+                    <div className="off" style={{borderStyle:'none outset outset outset',borderColor: 'grey', padding:'0.5px', position:'relative', position: 'relative', width:'944px', textAlign:'justify'}}>
                         <div>
                             <p style={{marginLeft: "10px"}}>><strong>Country :</strong> {this.props.offer.country} </p>
                             <p style={{marginLeft: "10px"}}>><strong>City : </strong> {this.props.offer.city} </p>
