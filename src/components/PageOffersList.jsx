@@ -36,8 +36,7 @@ class PageOffersList extends React.Component {
   componentDidMount() {
     if(!this.props.offLoaded)
     {
-      var city ="Gdynia";
-      this.props.loadOffers(city);
+      this.props.loadOffers();
     }
   }
 
@@ -64,6 +63,11 @@ class PageOffersList extends React.Component {
     if(filtr==='-')
     {
       this.props.loadOffers();
+    }
+    else if (filtr ==="date" & From===null & To===null)
+    {
+      alert("You have to choose some date")
+      return;
     }
     this.props.filtrOffers(filtr,city,people,From,To);
     this.changeVisibility();

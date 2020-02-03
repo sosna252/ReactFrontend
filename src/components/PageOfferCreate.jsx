@@ -128,14 +128,9 @@ class PageOfferCreate extends React.Component {
     })
     .then((response) => response.json())
     .then(res => {
-      //if(res.status !== 200) {
-        //this.setState({ isSaving: false, error: `Saving returned status ${res.status}`})
-        //alert("Something wrong");
-      //} else {
-        this.addPhoto(res.id);
         this.props.offerAdd(offer);
-        
-      //}
+        this.addPhoto(res.id);
+
     })
     this.props.history.push("/list");
   }
@@ -150,15 +145,13 @@ class PageOfferCreate extends React.Component {
       body: this.state.photo
     })
     .then(res => {
-      console.log(res);
-      //if(res.status !== 200) {
-        //this.setState({ isSaving: false, error: `Saving returned status ${res.status}`})
-        //alert("Something wrong");
-      //} else {
-        //this.props.history.push("/list");
-      //}
+      if(res.status !== 200) {
+        this.setState({ isSaving: false, error: `Saving returned status ${res.status}`})
+        alert("Something wrong");
+      } else {
+        this.props.history.push("/list");
+      }
     })  
-    
   }
 
   render() {

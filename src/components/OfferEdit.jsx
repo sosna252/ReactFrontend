@@ -13,7 +13,7 @@ class OfferEdit extends React.Component {
       start_date_time: this.props.offer.start_date_time,
       end_date_time: this.props.offer.end_date_time,
       description: this.props.offer.description,
-      photo: this.props.offer.photo,
+      photo: null,
       room_number: this.props.offer.room_number,
       beds: this.props.offer.beds,
       price: this.props.offer.price,
@@ -44,7 +44,7 @@ class OfferEdit extends React.Component {
   }
 
   photoChanged(e){
-    console.log(e.target.value);
+    this.setState({photo: e.target.files[0]})
   }
 
   titleChanged(e) {
@@ -115,9 +115,7 @@ class OfferEdit extends React.Component {
       "city": city,
       "address": address,
       "country": country
-    };
-    this.props.deleteOffer(e,this.props.offer.id);
-    fetch('http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items', {
+    };fetch('http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items', {
       method: 'POST', 
       headers: {
         'Content-Type': 'application/json',
@@ -126,13 +124,27 @@ class OfferEdit extends React.Component {
       },
       body: JSON.stringify(offer)
     })
+    .then((response) => response.json())
+    .then(res => {
+        this.addPhoto(res.id);
+        this.props.offerAdd(offer);
+    })
+  }
+  addPhoto(id){
+    console.log(this.state.photo)
+    fetch('http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/'+id+'/itemphoto', {
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'image/jpeg',
+        'securityTokenValue': "9fcbf4ff-5ea9-4027-ba82-5a7a7c59c156"
+      },
+      body: this.state.photo
+    })
     .then(res => {
       if(res.status !== 200) {
         this.setState({ isSaving: false, error: `Saving returned status ${res.status}`})
         alert("Something wrong");
       } else {
-        //console.log('hi')
-        this.props.offerAdd(offer);
         this.props.Update();
       }
     })  
@@ -191,7 +203,7 @@ class OfferEdit extends React.Component {
                   <div><input className="input-transfer-data form-control" type="number" step="1" min="10" value={price} onChange={this.priceChanged} disabled={isSaving} /></div>
                   
                   <div><label className="label-text">Photo : </label></div>
-                  <div><input className="input-transfer-data btn btn-light" type="file" accept="image/png, image/jpeg" disabled={isSaving}/></div>
+                  <div><input className="input-transfer-data btn btn-light" type="file" accept="image/png, image/jpeg" onChange={this.photoChanged} disabled={isSaving}/></div>
                   
                   <div><label className="label-text">Date From : </label></div>
                   <div><input className="input-transfer-data form-control" type="date" value={start_date_time} onChange={this.startDateChanged} disabled={isSaving}/></div>
