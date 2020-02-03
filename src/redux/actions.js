@@ -8,6 +8,14 @@ export const offersLoaded = (offers) => {
     }
   };
 }
+export const offersFiltred = (offers) => {
+  return {
+    type: OFFERS_LOADED,
+    payload: {
+      offers
+    }
+  };
+}
 export const offerAdd = (newoffer)=>{
   return{
     type: OFFER_ADD,
@@ -84,10 +92,42 @@ export const sortOffers=()=>{
     );
   };
 }
-export const filtrOffers=()=>{
+export const filtrOffers=(filtr,city,people,From,To)=>{
   return(dispatch)=>{
     dispatch(offersLoadingOffers())
-    fetch('http://localhost:3004/offers')
+    var tmp=""
+    if(filtr==="city")
+    {
+       tmp = 'http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items?city='+city;
+    }
+    else if(filtr==="people")
+    {
+      tmp = 'http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items?people=1';
+    }
+    else if(filtr==="date")
+    {
+      if(From !==null & To !==null)
+      {
+        tmp = 'http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items?dateFrom='+From+'&dateTo='+To;
+      }
+      else if (From !==null)
+      {
+        tmp = 'http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items?dateFrom='+From
+      }
+      else
+      {
+        tmp = 'http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items?dateTo='+To
+      }
+    }
+   console.log(tmp)
+    fetch(tmp, {
+      method: 'GET', 
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'securityTokenValue': "9fcbf4ff-5ea9-4027-ba82-5a7a7c59c156"
+      }
+    })
     .then((data) => data.json())
     .then(
     (offers) => dispatch(offersFiltred(offers)),

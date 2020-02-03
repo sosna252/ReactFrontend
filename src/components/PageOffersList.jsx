@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loadOffers } from '../redux/actions';
+import { loadOffers, filtrOffers } from '../redux/actions';
 import Offer from './Offer';
 import OfferEdit from './OfferEdit'
 import OfferFiltr from './OfferFiltr';
@@ -19,19 +19,25 @@ class PageOffersList extends React.Component {
   constructor(props) {
     super(props);
     this.state ={
-      filtr: false
+      filtrVisible: false,
+      filtrText: "",
+      sortText: "",
+      filtred: false,
+      sorted: false,
     }
     this.changeVisibility = this.changeVisibility.bind(this);
     this.openPopupbox = this.openPopupbox.bind(this);
     this.editOffer = this.editOffer.bind(this);
     this.cancelUpdate = this.cancelUpdate.bind(this);
     this.Update = this.Update.bind(this);
+    this.handleFiltred = this.handleFiltred.bind(this);
   }
 
   componentDidMount() {
     if(!this.props.offLoaded)
     {
-      this.props.loadOffers();
+      var city ="Gdynia";
+      this.props.loadOffers(city);
     }
   }
 
@@ -51,8 +57,22 @@ class PageOffersList extends React.Component {
   }
 
   changeVisibility(){
-    this.setState({filtr: !this.state.filtr})
+    this.setState({filtrVisible: !this.state.filtrVisible})
   }
+
+  handleFiltred(filtr,city,people,From,To){
+    if(filtr==='-')
+    {
+      this.props.loadOffers();
+    }
+    this.props.filtrOffers(filtr,city,people,From,To);
+    this.changeVisibility();
+    
+  }
+  handleSorted(){
+    this.setState({filtrVisible: !this.state.filtrVisible})
+  }
+  
 
   openPopupbox = (photo) => {
     const content = <img  src={`http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/itemphoto/`+photo} style={{width:'90%', heigh:'90%'}}/>
@@ -104,14 +124,14 @@ class PageOffersList extends React.Component {
     return (
       <div align="center">
         <div className="bg" style={{width: '1004px',}}>
-          <div align="left" style={{width: '944px', position: 'relative', textAlign: 'justify'}}>
-            {this.state.filtr ? 
-              <div style={{position: 'absolute', left: '40%', top: '10px', zIndex:'1'}}>
-                <OfferFiltr changeVisibility={this.changeVisibility}/>
+          <div align="center" style={{width: '944px', position: 'relative', textAlign: 'justify'}}>
+            {this.state.filtrVisible ? 
+              <div style={{position: 'absolute', left: '30%', top: '10px', zIndex:'1'}}>
+                <OfferFiltr changeVisibility={this.changeVisibility} handleFiltred={this.handleFiltred}/>
               </div>
              : 
               <div style={{position: 'absolute', left: '50%'}}><Button variant="outline-info" size="sm" className="rounded-circle" onClick={this.changeVisibility}>Filtr</Button></div>}
-            {this.state.filtr ? <div><br /><br /> </div>: <br />}
+            {this.state.filtrVisible ? <div><br /><br /> </div>: <br />}
             <div style={{float: 'left', width: '30%'}}>
               <h1 >Offers List :</h1>
             </div>
@@ -173,6 +193,7 @@ const mapStateToProps = (state /*, ownProps*/) => {
 const mapDispatchToProps = (dispatch) => ({
  loadOffers: ()=> dispatch(loadOffers()),
  offerDelete: id => dispatch(offerDelete(id)),
+ filtrOffers: (filtr,city,people,From,To)=>dispatch(filtrOffers(filtr,city,people,From,To)),
 })
 
 export default connect(
