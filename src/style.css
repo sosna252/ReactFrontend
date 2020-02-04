@@ -1,12 +1,7 @@
 body, html {
   height: 100%;
-  background: rgb(47,142,196);
-background: linear-gradient(270deg, rgba(47,142,196,1) 0%, rgba(199,238,254,1) 15%, rgba(236,249,255,1) 53%, rgba(199,238,254,1) 85%, rgba(47,142,196,1) 100%);
-  background-image: url('https://i.postimg.cc/R0TG04j3/Bez-nazwy.png');
-  background: rgb(199,238,254);
-background: linear-gradient(270deg, rgba(199,238,254,1) 0%, rgba(199,238,254,1) 15%, rgba(236,249,255,1) 53%, rgba(199,238,254,1) 85%, rgba(147,211,249,0.9279061966583508) 100%);
   background: rgb(106,195,246);
-background: linear-gradient(270deg, rgba(106,195,246,1) 0%, rgba(199,238,254,1) 15%, rgba(236,249,255,1) 50%, rgba(199,238,254,1) 85%, rgba(106,195,246,0.9279061966583508) 100%);
+  background: linear-gradient(270deg, rgba(106,195,246,1) 0%, rgba(199,238,254,1) 15%, rgba(236,249,255,1) 50%, rgba(199,238,254,1) 85%, rgba(106,195,246,0.9279061966583508) 100%);
   background-position: top;  
   font-family: Calibri,Tahoma, Arial;	
 	font-style: italic;
@@ -14,16 +9,7 @@ background: linear-gradient(270deg, rgba(106,195,246,1) 0%, rgba(199,238,254,1) 
 
 .menu{
   background: rgb(155,156,157);
-background: linear-gradient(180deg, rgba(155,156,157,1) 0%, rgba(176,176,176,1) 50%, rgba(185,185,185,1) 90%, rgba(240,240,240,0) 100%);
-
-}
-
-.up{
-  height: 17px;
-}
-.foot{
-  height: 31px;
-  width: 1004px;
+  background: linear-gradient(180deg, rgba(155,156,157,1) 0%, rgba(176,176,176,1) 50%, rgba(185,185,185,1) 90%, rgba(240,240,240,0) 100%);
 }
 .down{
   height: 10px;
@@ -39,14 +25,12 @@ background: linear-gradient(180deg, rgba(155,156,157,1) 0%, rgba(176,176,176,1) 
 	margin-bottom: 10px;
 	color: rosybrown;
 }
-.shadow :hover{
-  box-shadow: 10px 10px 27px 10px rgba(48,50,50,1) !important;
-}
+
 .off{
   border-radius: 10px;
   background: rgb(221,245,255);
   background: linear-gradient(270deg, rgba(221,245,255,1) 0%, rgba(240,245,247,1) 15%, rgba(255,255,255,1) 50%, rgba(240,245,247,1) 85%, rgba(221,245,255,1) 100%);
-  
+  box-shadow:  10px 27px 10px rgba(48,50,50,1) !important;
 }
 .grid-container {
   display: grid;
@@ -54,14 +38,12 @@ background: linear-gradient(180deg, rgba(155,156,157,1) 0%, rgba(176,176,176,1) 
   grid-template-columns: 150px auto;
   text-align: left;
 }
-
 .input-transfer-data {
   width: 20em;
   max-width: 20em;
   min-width: 20em;
   border-radius: 15px !important;
 }
-
 textarea.input-transfer-data {
   padding: 5px;
 }

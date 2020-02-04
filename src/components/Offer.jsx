@@ -16,7 +16,7 @@ class Offer extends React.Component {
     
     render(){
        return(
-            <div style={{ clear: 'left', marginBottom:'2px'}} >
+            <div  style={{ clear: 'left', marginBottom:'2px'}} >
                 <div className="off" style={{border:'outset grey', padding:'0.5px', position:'relative',height:'110px', width:'944px', textAlign:'justify'}} onClick={()=> {this.detailsVisible()}}>
                     <div style={{width:'15%', float:'left', height:"100%"}}>
                         <img src={'http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/itemphoto/'+ this.props.offer.id} onClick={() => {this.props.openPopupbox(this.props.offer.id)}} style={{width:'100%', height:"100%", borderRadius: '5px 0px 0px 5px'}} />
@@ -37,6 +37,7 @@ class Offer extends React.Component {
                     <Button className="rounded-pill shadow" variant="outline-primary" size="sm" style={{position:'absolute', right:'80px', bottom:'5px'}} onClick={() => {this.props.editOffer(this.props.offer)}}> Edit </Button>
                 </div>
                 {this.state.details ?
+                <div>
                     <div className="off" style={{borderStyle:'none outset outset outset',borderColor: 'grey', padding:'0.5px', position:'relative', position: 'relative', width:'944px', textAlign:'justify'}}>
                         <div>
                             <p style={{marginLeft: "10px"}}>><strong>Country :</strong> {this.props.offer.country} </p>
@@ -56,6 +57,8 @@ class Offer extends React.Component {
                             <p><strong>Description : </strong></p>
                             <span> {this.props.offer.description} </span>
                         </div>
+                    </div>
+                    <br />
                     </div>
                     :
                     null

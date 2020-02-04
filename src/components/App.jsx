@@ -4,7 +4,6 @@ import {
   Switch,
   Route,
 } from 'react-router-dom'
-
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import rootReducer from '../redux/reducers'
@@ -14,7 +13,6 @@ import PageLogin from './PageLogin';
 import PageOffersList from './PageOffersList';
 import PageOfferCreate from './PageOfferCreate';
 import AppHeader from './Header'
-import AppFooter from './Footer'
 import "../style.css"
 
 const store = createStore(rootReducer, {}, applyMiddleware(reduxLogger,reduxThunk))

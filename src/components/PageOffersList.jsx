@@ -2,7 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loadOffers, filtrOffers, sortOffers } from '../redux/actions';
+import {
+  loadOffers,
+  filtrOffers,
+  sortOffers 
+} from '../redux/actions';
 import Offer from './Offer';
 import OfferEdit from './OfferEdit';
 import PageLogOut from './PageLogOut';
@@ -11,8 +15,9 @@ import {
   PopupboxManager,
   PopupboxContainer
 } from 'react-popupbox';
-
-import { offerDelete } from '../redux/actions';
+import { 
+  offerDelete 
+} from '../redux/actions';
 import "react-popupbox/dist/react-popupbox.css";
 import Button from 'react-bootstrap/Button';
 
@@ -129,10 +134,12 @@ class PageOffersList extends React.Component {
 }
 
   render() {
-    const { loading,offers,login, user } = this.props;
+    const { loading, offers, login } = this.props;
     return (
       <div align="center">
-        {!login ? <PageLogOut />
+        {
+        !login ? 
+          <PageLogOut />
         :
           <div className="bg" style={{width: '1004px',}}>            
             <div className="" align="center" style={{width: '944px', position: 'relative', textAlign: 'justify'}}>
@@ -204,7 +211,6 @@ const mapDispatchToProps = (dispatch) => ({
  offerDelete: id => dispatch(offerDelete(id)),
  filtrOffers: (city,people,From,To,user)=>dispatch(filtrOffers(city,people,From,To,user)),
  sortOffers: (sort,desc,user) => dispatch(sortOffers(sort,desc,user)),
-
 })
 
 export default connect(

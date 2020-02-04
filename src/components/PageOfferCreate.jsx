@@ -112,7 +112,7 @@ class PageOfferCreate extends React.Component {
       "room_number": room_number,
       "beds": beds,
       "price": price,
-      "rating": rating,
+      "rating": (Math.floor(Math.random() * (5 - 1)) + 1),
       "city": city,
       "address": address,
       "country": country
@@ -122,7 +122,7 @@ class PageOfferCreate extends React.Component {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'securityTokenValue': "9fcbf4ff-5ea9-4027-ba82-5a7a7c59c156"
+        'securityTokenValue': this.props.user
       },
       body: JSON.stringify(offer)
     })
@@ -140,7 +140,7 @@ class PageOfferCreate extends React.Component {
       method: 'POST', 
       headers: {
         'Content-Type': 'image/jpeg',
-        'securityTokenValue': "9fcbf4ff-5ea9-4027-ba82-5a7a7c59c156"
+        'securityTokenValue': this.props.user
       },
       body: this.state.photo
     })
