@@ -112,35 +112,30 @@ export const sortOffers=(sort,desc)=>{
     );
   };
 }
-export const filtrOffers=(filtr,city,people,From,To)=>{
+export const filtrOffers=(city,people,From,To)=>{
   return(dispatch)=>{
     dispatch(offersLoadingOffers())
-    var tmp=""
-    if(filtr==="city")
+    var fromTmp="1000-01-01";
+    var toTmp="3000-01-01";
+    var Tmp="";
+    
+    if(From!==null)
     {
-       tmp = 'http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items?city='+city;
+      fromTmp = From;
     }
-    else if(filtr==="people")
+    if(To!==null)
     {
-      tmp = 'http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items?people='+people;
+      toTmp = To;
     }
-    else if(filtr==="date")
+    if(city!==null)
     {
-      if(From !==null & To !==null)
-      {
-        tmp = 'http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items?dateFrom='+From+'&dateTo='+To;
-      }
-      else if (From !==null)
-      {
-        tmp = 'http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items?dateFrom='+From
-      }
-      else
-      {
-        tmp = 'http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items?dateTo='+To
-      }
+       Tmp = `http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items?city=${city}&people=${people}&dateFrom=${fromTmp}&dateTo=${toTmp}`;
     }
-   console.log(tmp)
-    fetch(tmp, {
+    else
+    {
+      Tmp = `http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items?people=${people}&dateFrom=${fromTmp}&dateTo=${toTmp}`
+    }
+    fetch(Tmp, {
       method: 'GET', 
       headers: {
         'Content-Type': 'application/json',

@@ -1,4 +1,6 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 import Button from 'react-bootstrap/Button';
 
 class PageLogin extends React.Component {
@@ -46,6 +48,7 @@ class PageLogin extends React.Component {
             }
             else {
             console.log(res)
+            this.props.history.push("/list");
             //this.props.UserLogging(user);
             //console.log(user);
            // this.props.history.push("/list");
@@ -77,4 +80,4 @@ class PageLogin extends React.Component {
 
     }
 }
-export default PageLogin 
+export default (withRouter(PageLogin));

@@ -18,7 +18,6 @@ background: linear-gradient(270deg, rgba(106,195,246,1) 0%, rgba(199,238,254,1) 
 .up{
   background-image: url('IMG/gorna_czesc_zawartosci.gif');
   height: 17px;
-  width: 1004px;
 }
 .foot{
   background-image: url('IMG/dolna_czesc_zawartosci.gif');

@@ -20,9 +20,8 @@ class PageOffersList extends React.Component {
     super(props);
     this.state ={
       filtrVisible: false,
-      filtrText: "",
-      sortText: "-",
-      filtred: false,
+      filtrText: "-",
+      sortText: "date",
       sorted: false,
       desc: false,
     }
@@ -33,7 +32,6 @@ class PageOffersList extends React.Component {
     this.Update = this.Update.bind(this);
     this.handleFiltred = this.handleFiltred.bind(this);
     this.descChange = this.descChange.bind(this);
-    this.sortChange= this.sortChange.bind(this);
     this.SortHandle = this.SortHandle.bind(this);
   }
 
@@ -61,45 +59,28 @@ class PageOffersList extends React.Component {
 
   descChange(){
     this.setState({desc: !this.state.desc})
-  }
-  sortChange(e){
-    this.setState({sortText: e.target.value})
-  }
-  SortHandle(){
-    if(this.state.sortText==='-')
+    if(this.state.sorted)
     {
-      this.props.loadOffers();
+      this.props.sortOffers(this.state.sortText, !this.state.desc);
     }
-    console.log(this.state.desc)
-    this.props.sortOffers(this.state.sortText, this.state.desc);
-
+  }
+  SortHandle(text){
+    console.log(text)
+    this.setState({sortText: text, sorted: true})
+    this.props.sortOffers(text, this.state.desc);
   }
 
   changeVisibility(){
     this.setState({filtrVisible: !this.state.filtrVisible})
   }
 
-  handleFiltred(filtr,city,people,From,To){
-    if(filtr==='-')
-    {
-      this.props.loadOffers();
-    }
-    else if (filtr ==="date" & From===null & To===null)
-    {
-      alert("You have to choose some date")
-      return;
-    }
-    this.props.filtrOffers(filtr,city,people,From,To);
+  handleFiltred(city,people,From,To){
+    console.log(city)
+    this.props.filtrOffers(city,people,From,To);
     this.changeVisibility();
-    
   }
-  handleSorted(){
-    this.setState({filtrVisible: !this.state.filtrVisible})
-  }
-  
-
   openPopupbox = (photo) => {
-    const content = <img  src={`http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/itemphoto/`+photo} style={{width:'90%', heigh:'90%'}}/>
+    const content = <img  src={`http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/itemphoto/${photo}`} style={{width:'90%', heigh:'90%'}}/>
     PopupboxManager.open({
       content,
       config: {
@@ -148,28 +129,27 @@ class PageOffersList extends React.Component {
     return (
       <div align="center">
         <div className="bg" style={{width: '1004px',}}>
-          <div align="center" style={{width: '944px', position: 'relative', textAlign: 'justify'}}>
+          <div className="" align="center" style={{width: '944px', position: 'relative', textAlign: 'justify'}}>
             {this.state.filtrVisible ? 
-              <div style={{position: 'absolute', left: '30%', top: '10px', zIndex:'1'}}>
+              <div align="center" style={{width: '944px', top: '1px', zIndex:'1'}}>
                 <OfferFiltr changeVisibility={this.changeVisibility} handleFiltred={this.handleFiltred}/>
               </div>
              : 
-              <div style={{position: 'absolute', left: '50%'}}><Button variant="outline-info" size="sm" className="rounded-circle" onClick={this.changeVisibility}>Filtr</Button></div>}
-            {this.state.filtrVisible ? <div><br /><br /> </div>: <br />}
+              <div style={{position: 'absolute', left: '50%', zIndex:"1"}}><Button variant="outline-info" size="sm" className="rounded-pill" onClick={this.changeVisibility}>Filtr</Button></div>}
+            
             <div style={{float: 'left', width: '30%'}}>
               <h1 >Offers List :</h1>
             </div>
             <div style={{ float: 'left', position: 'relative', width: '70%', height: '80px'}}>
-              <div align="right" style={{ clear:"left",right:'3px', position:'absolute', bottom:'5px',width:'25%'}}>
-                <select className="form-control form-control-sm" style={{width:"70%",float: 'left'}} onChange={this.sortChange}>
-                  <option value="none"> - </option>
-                  <option value="price">Price </option>
-                  <option value="date">Date </option>
-                  <option value="rate">Rate</option>
-                </select>
-                <Button className="rounded-pill" variant="outline-dark" size="sm" onClick={this.SortHandle}>Sort</Button>
-                <p style={{ float:"left"}}>Desc:</p> <input type="checkbox" onChange={this.descChange}></input>
-              </div>          
+              <div align="right" style={{ clear:"left",right:'3px', position:'absolute', bottom:'5px',width:'40%'}}>
+              Sortuj: 
+              <nav >
+                <p className="btn btn-light"  onClick={()=>this.SortHandle("price")} style={{borderRadius: "5px 0px 0px 5px"}}>Price</p> 
+                <p className="btn btn-light" onClick={()=>this.SortHandle("date")} style={{borderRadius: "0px"}}>Date</p> 
+                <p className="btn btn-light" onClick={()=>this.SortHandle("rating")} tyle={{borderRadius: "0px 5px 5px 0px" }}>Rating</p>
+                <p className="btn" onClick={this.descChange}>{this.state.desc? <i className="fa fa-arrow-down" />: <i className="fa fa-arrow-up"/>} </p>
+                </nav>
+              </div>
             </div>
           </div>
           {loading ?
@@ -214,7 +194,7 @@ const mapStateToProps = (state /*, ownProps*/) => {
 const mapDispatchToProps = (dispatch) => ({
  loadOffers: ()=> dispatch(loadOffers()),
  offerDelete: id => dispatch(offerDelete(id)),
- filtrOffers: (filtr,city,people,From,To)=>dispatch(filtrOffers(filtr,city,people,From,To)),
+ filtrOffers: (city,people,From,To)=>dispatch(filtrOffers(city,people,From,To)),
  sortOffers: (sort,desc) => dispatch(sortOffers(sort,desc)),
 
 })
