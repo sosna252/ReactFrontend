@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button';
+import Rating from 'react-rating'
 
 class Offer extends React.Component {
     constructor(props) {
@@ -15,7 +16,7 @@ class Offer extends React.Component {
     
     render(){
        return(
-            <div  style={{ clear: 'left', marginBottom:'2px'}} >
+            <div style={{ clear: 'left', marginBottom:'2px'}} >
                 <div className="off" style={{border:'outset grey', padding:'0.5px', position:'relative',height:'110px', width:'944px', textAlign:'justify'}} onClick={()=> {this.detailsVisible()}}>
                     <div style={{width:'15%', float:'left', height:"100%"}}>
                         <img src={'http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/itemphoto/'+ this.props.offer.id} onClick={() => {this.props.openPopupbox(this.props.offer.id)}} style={{width:'100%', height:"100%", borderRadius: '5px 0px 0px 5px'}} />
@@ -46,9 +47,9 @@ class Offer extends React.Component {
                         <div style={{position: 'absolute', right: '5%', top: '8px'}}> 
                             <p><strong>Start Date : </strong> {this.props.offer.start_date_time} </p>
                             <p><strong>End Date : </strong> {this.props.offer.end_date_time} </p>
-                            <p style={{textAlign: 'right', marginRight:'80px'}}><strong>Rating :</strong> 
+                            <p style={{textAlign: 'right', marginRight: '80px'}}><strong>Rating :</strong> 
                                 <br />
-                                <p style={{textAlign: "right", marginRight:'25px'}}>{this.props.offer.price}</p> 
+                                <Rating emptySymbol={<i class="fa fa-star " style={{color:'grey', fontSize: '20px'}}></i>} fullSymbol={<i class="fa fa-star" style={{color:'gold',fontSize: '20px'}}></i>} readonly="true" stop="5" initialRating={this.props.offer.rating} />
                             </p>
                         </div>
                         <div style={{textAlign: "center", padding: '2px'}}>

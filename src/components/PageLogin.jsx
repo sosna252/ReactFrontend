@@ -61,7 +61,7 @@ class PageLogin extends React.Component {
         return(
             <div align="center">
                 <div className="bg" style={{ width: '1004px' }}>
-                    <div align="left" style={{ width: '944px', position: 'relative' }}>
+                    <div align="center" style={{ width: '944px', position: 'relative' }}>
                         <h1 align="center">Log in:</h1>
                         <form onSubmit={this.logging}>
                             <div align="center"><label  className="label-text"><b>Login : </b></label></div>

@@ -36,7 +36,7 @@ class PageOffersList extends React.Component {
   }
 
   componentDidMount() {
-    if(!this.props.offLoaded)
+   // if(this.props.login)
     {
       this.props.loadOffers();
     }
@@ -125,7 +125,7 @@ class PageOffersList extends React.Component {
 }
 
   render() {
-    const { loading,offers } = this.props;
+    const { loading,offers,login, user } = this.props;
     return (
       <div align="center">
         <div className="bg" style={{width: '1004px',}}>
@@ -135,7 +135,7 @@ class PageOffersList extends React.Component {
                 <OfferFiltr changeVisibility={this.changeVisibility} handleFiltred={this.handleFiltred}/>
               </div>
              : 
-              <div style={{position: 'absolute', left: '50%', zIndex:"1"}}><Button variant="outline-info" size="sm" className="rounded-pill" onClick={this.changeVisibility}>Filtr</Button></div>}
+              <div style={{position: 'absolute', left: '50%', zIndex:"1"}}><Button variant="outline-info" size="sm" className="rounded-pill" onClick={this.changeVisibility}><i className="fa fa-search"></i> Filtr</Button></div>}
             
             <div style={{float: 'left', width: '30%'}}>
               <h1 >Offers List :</h1>
@@ -186,8 +186,9 @@ class PageOffersList extends React.Component {
 const mapStateToProps = (state /*, ownProps*/) => {
   return {
     offers: state.offers,
-    offLoaded: state.offLoaded,
-    loading: state.loading
+    loading: state.loading,
+    login: state.login,
+    user: state.user
   }
 }
 

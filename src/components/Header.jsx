@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 
 function Header() {
   return (
-    <nav className="menu" style={{position:'relative', width: '100%', margin: 'auto'}}>
+    <nav className="menu" style={{position:'relative', width: '100%', margin: 'auto', height: '55px'}}>
       <NavLink exact activeClassName="active" to="/">
       <Button variant="light" className="rounded-circle" style={{marginTop: '5px', marginLeft: '3px'}}><i className="fa fa-home "></i></Button>
       </NavLink>

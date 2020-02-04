@@ -23,7 +23,7 @@ const App = () => (
   <Provider store={store}>
     <Router>
       <AppHeader />
-      <hr />      
+      <br/>      
       <div className="up" style={{position:'relative', width: '1004px', margin: 'auto'}}></div>
       <Switch>
       <Route exact path="/">
@@ -36,10 +36,9 @@ const App = () => (
           <PageOfferCreate></PageOfferCreate>
         </Route>
       </Switch>
-      <AppFooter />
       <div className="down" style={{position:'relative', width: '1004px', margin: 'auto'}} />
       <div id="copyright">
-					&copy; 2020, <strong>React</strong> created by <em>Flatly</em>
+					&copy; 2019/2020, <strong>React</strong> created by <strong>Flatly Team</strong>
 			</div>
     </Router>
   </Provider>

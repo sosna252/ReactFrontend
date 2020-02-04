@@ -117,8 +117,7 @@ export const filtrOffers=(city,people,From,To)=>{
     dispatch(offersLoadingOffers())
     var fromTmp="1000-01-01";
     var toTmp="3000-01-01";
-    var Tmp="";
-    
+    var Tmp="";    
     if(From!==null)
     {
       fromTmp = From;

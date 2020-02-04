@@ -11,21 +11,21 @@ background: linear-gradient(270deg, rgba(106,195,246,1) 0%, rgba(199,238,254,1) 
   font-family: Calibri,Tahoma, Arial;	
 	font-style: italic;
 }
-.bg {
-  background-image: url('IMG/srodkowa_czesc_zawartosci.gif');
-  background-repeat: repeat;
+
+.menu{
+  background: rgb(155,156,157);
+background: linear-gradient(180deg, rgba(155,156,157,1) 0%, rgba(176,176,176,1) 50%, rgba(185,185,185,1) 90%, rgba(240,240,240,0) 100%);
+
 }
+
 .up{
-  background-image: url('IMG/gorna_czesc_zawartosci.gif');
   height: 17px;
 }
 .foot{
-  background-image: url('IMG/dolna_czesc_zawartosci.gif');
   height: 31px;
   width: 1004px;
 }
 .down{
-  background-image: url('IMG/dol.gif');
   height: 10px;
   width: 1004px;
 }
@@ -45,7 +45,7 @@ background: linear-gradient(270deg, rgba(106,195,246,1) 0%, rgba(199,238,254,1) 
 .off{
   border-radius: 10px;
   background: rgb(221,245,255);
-background: linear-gradient(270deg, rgba(221,245,255,1) 0%, rgba(240,245,247,1) 15%, rgba(255,255,255,1) 50%, rgba(240,245,247,1) 85%, rgba(221,245,255,1) 100%);
+  background: linear-gradient(270deg, rgba(221,245,255,1) 0%, rgba(240,245,247,1) 15%, rgba(255,255,255,1) 50%, rgba(240,245,247,1) 85%, rgba(221,245,255,1) 100%);
   
 }
 .grid-container {
