@@ -97,7 +97,7 @@ export const loadOffers=(token)=>{
     );
   };
 }
-export const sortOffers=(sort,desc)=>{
+export const sortOffers=(sort,desc, token)=>{
   return(dispatch)=>{
     dispatch(offersLoadingOffers())
     var tmp = 'http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items?sort='+sort;
@@ -110,7 +110,7 @@ export const sortOffers=(sort,desc)=>{
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'securityTokenValue': "9fcbf4ff-5ea9-4027-ba82-5a7a7c59c156"
+        'securityTokenValue': token
       }
     })
     .then((data) => data.json())
@@ -120,7 +120,7 @@ export const sortOffers=(sort,desc)=>{
     );
   };
 }
-export const filtrOffers=(city,people,From,To)=>{
+export const filtrOffers=(city,people,From,To,token)=>{
   return(dispatch)=>{
     dispatch(offersLoadingOffers())
     var fromTmp="1000-01-01";
@@ -147,7 +147,7 @@ export const filtrOffers=(city,people,From,To)=>{
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'securityTokenValue': "9fcbf4ff-5ea9-4027-ba82-5a7a7c59c156"
+        'securityTokenValue': token
       }
     })
     .then((data) => data.json())

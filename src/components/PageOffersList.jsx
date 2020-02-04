@@ -57,7 +57,7 @@ class PageOffersList extends React.Component {
     })
     .then( ()=> {            
           this.props.offerDelete(id);
-          this.props.loadOffers();
+          this.props.loadOffers(this.props.user);
       })  
   }
 
@@ -65,22 +65,22 @@ class PageOffersList extends React.Component {
     this.setState({desc: !this.state.desc})
     if(this.state.sorted)
     {
-      this.props.sortOffers(this.state.sortText, !this.state.desc);
+      this.props.sortOffers(this.state.sortText, !this.state.desc, this.props.user);
     }
   }
   SortHandle(text){
     console.log(text)
     this.setState({sortText: text, sorted: true})
-    this.props.sortOffers(text, this.state.desc);
+    this.props.sortOffers(text, this.state.desc, this.props.user);
   }
 
   changeVisibility(){
     this.setState({filtrVisible: !this.state.filtrVisible})
   }
 
-  handleFiltred(city,people,From,To){
+  handleFiltred(city, people, From, To){
     console.log(city)
-    this.props.filtrOffers(city,people,From,To);
+    this.props.filtrOffers(city, people, From, To, this.props.user);
     this.changeVisibility();
   }
   openPopupbox = (photo) => {
@@ -134,8 +134,7 @@ class PageOffersList extends React.Component {
       <div align="center">
         {!login ? <PageLogOut />
         :
-          <div className="bg" style={{width: '1004px',}}>
-            
+          <div className="bg" style={{width: '1004px',}}>            
             <div className="" align="center" style={{width: '944px', position: 'relative', textAlign: 'justify'}}>
               {this.state.filtrVisible ? 
                 <div align="center" style={{width: '944px', top: '1px', zIndex:'1'}}>
@@ -203,8 +202,8 @@ const mapStateToProps = (state /*, ownProps*/) => {
 const mapDispatchToProps = (dispatch) => ({
  loadOffers: (user)=> dispatch(loadOffers(user)),
  offerDelete: id => dispatch(offerDelete(id)),
- filtrOffers: (city,people,From,To)=>dispatch(filtrOffers(city,people,From,To)),
- sortOffers: (sort,desc) => dispatch(sortOffers(sort,desc)),
+ filtrOffers: (city,people,From,To,user)=>dispatch(filtrOffers(city,people,From,To,user)),
+ sortOffers: (sort,desc,user) => dispatch(sortOffers(sort,desc,user)),
 
 })
 
