@@ -1,4 +1,4 @@
-import { OFFERS_LOADED, OFFER_ADD,OFFERS_LOADING,OFFERS_ERROR,OFFER_DELETE,OFFER_EDIT, USER_LOGGING} from './constants';
+import { OFFERS_LOADED, OFFER_ADD,OFFERS_LOADING,OFFERS_ERROR,OFFER_DELETE,OFFER_EDIT, USER_LOGGING, USER_LOGOUT} from './constants';
 
 export const offersLoaded = (offers) => {
   return {
@@ -68,10 +68,18 @@ export const UserLogging=(user)=>{
     payload: user
   }
 }
+export const UserLogOut=()=>{
+  return{
+    type: USER_LOGOUT,
+    payload:{
+
+    }
+  }
+}
   
     
 
-export const loadOffers=()=>{
+export const loadOffers=(token)=>{
   return(dispatch)=>{
     dispatch(offersLoadingOffers())
     fetch('http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items', {
@@ -79,7 +87,7 @@ export const loadOffers=()=>{
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'securityTokenValue': "9fcbf4ff-5ea9-4027-ba82-5a7a7c59c156"
+        'securityTokenValue': token
       }
     })
     .then((data) => data.json())

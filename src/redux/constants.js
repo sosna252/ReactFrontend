@@ -5,3 +5,4 @@ export const OFFERS_ERROR = 'Offers/OFFERS_ERROR';
 export const OFFER_DELETE = 'Offers/OFFER_DELETE';
 export const OFFER_EDIT = 'Offers/OFFER_EDIT';
 export const USER_LOGGING = 'Users/USER_LOGGING';
+export const USER_LOGOUT = 'Users/USER_LOGOUT';

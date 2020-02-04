@@ -49,7 +49,7 @@ class Offer extends React.Component {
                             <p><strong>End Date : </strong> {this.props.offer.end_date_time} </p>
                             <p style={{textAlign: 'right', marginRight: '80px'}}><strong>Rating :</strong> 
                                 <br />
-                                <Rating emptySymbol={<i class="fa fa-star " style={{color:'grey', fontSize: '20px'}}></i>} fullSymbol={<i class="fa fa-star" style={{color:'gold',fontSize: '20px'}}></i>} readonly="true" stop="5" initialRating={this.props.offer.rating} />
+                                <Rating emptySymbol={<i className="fa fa-star " style={{color:'grey', fontSize: '20px'}}></i>} fullSymbol={<i className="fa fa-star" style={{color:'gold',fontSize: '20px'}}></i>} readonly="true" stop="5" initialRating={this.props.offer.rating} />
                             </p>
                         </div>
                         <div style={{textAlign: "center", padding: '2px'}}>

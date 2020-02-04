@@ -24,7 +24,6 @@ const App = () => (
     <Router>
       <AppHeader />
       <br/>      
-      <div className="up" style={{position:'relative', width: '1004px', margin: 'auto'}}></div>
       <Switch>
       <Route exact path="/">
           <PageLogin></PageLogin>

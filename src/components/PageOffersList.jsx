@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loadOffers, filtrOffers, sortOffers } from '../redux/actions';
 import Offer from './Offer';
-import OfferEdit from './OfferEdit'
+import OfferEdit from './OfferEdit';
+import PageLogOut from './PageLogOut';
 import OfferFiltr from './OfferFiltr';
 import {
   PopupboxManager,
@@ -36,9 +38,11 @@ class PageOffersList extends React.Component {
   }
 
   componentDidMount() {
-   // if(this.props.login)
+    console.log(this.props.login)
+    if(this.props.login)
     {
-      this.props.loadOffers();
+      console.log(this.props.user);
+      this.props.loadOffers(this.props.user);
     }
   }
 
@@ -128,57 +132,61 @@ class PageOffersList extends React.Component {
     const { loading,offers,login, user } = this.props;
     return (
       <div align="center">
-        <div className="bg" style={{width: '1004px',}}>
-          <div className="" align="center" style={{width: '944px', position: 'relative', textAlign: 'justify'}}>
-            {this.state.filtrVisible ? 
-              <div align="center" style={{width: '944px', top: '1px', zIndex:'1'}}>
-                <OfferFiltr changeVisibility={this.changeVisibility} handleFiltred={this.handleFiltred}/>
-              </div>
-             : 
-              <div style={{position: 'absolute', left: '50%', zIndex:"1"}}><Button variant="outline-info" size="sm" className="rounded-pill" onClick={this.changeVisibility}><i className="fa fa-search"></i> Filtr</Button></div>}
+        {!login ? <PageLogOut />
+        :
+          <div className="bg" style={{width: '1004px',}}>
             
-            <div style={{float: 'left', width: '30%'}}>
-              <h1 >Offers List :</h1>
-            </div>
-            <div style={{ float: 'left', position: 'relative', width: '70%', height: '80px', top:"5%"}}>
-              <div align="right" style={{ clear:"left",right:'3px', position:'absolute', bottom:'5px',width:'40%'}}>
-              <nav style={{margin: "5px"}}>
-                <label style={{margin: "5px"}}>Sortuj : </label>
-                <label className="btn btn-light btn-sm"  onClick={()=>this.SortHandle("price")} style={{borderRadius: "5px 0px 0px 5px"}}>Price</label> 
-                <label className="btn btn-light btn-sm" onClick={()=>this.SortHandle("date")} style={{borderRadius: "0px"}}>Date</label> 
-                <label className="btn btn-light btn-sm" onClick={()=>this.SortHandle("rating")} style={{borderRadius: "0px 5px 5px 0px"}}>Rating</label>
-                <label className="btn" onClick={this.descChange}>{this.state.desc? <i className="fa fa-arrow-down" />: <i className="fa fa-arrow-up"/>} </label>
-                </nav>
+            <div className="" align="center" style={{width: '944px', position: 'relative', textAlign: 'justify'}}>
+              {this.state.filtrVisible ? 
+                <div align="center" style={{width: '944px', top: '1px', zIndex:'1'}}>
+                  <OfferFiltr changeVisibility={this.changeVisibility} handleFiltred={this.handleFiltred}/>
+                </div>
+              : 
+                <div style={{position: 'absolute', left: '50%', zIndex:"1"}}><Button variant="outline-info" size="sm" className="rounded-pill" onClick={this.changeVisibility}><i className="fa fa-search"></i> Filtr</Button></div>}
+              
+              <div style={{float: 'left', width: '30%'}}>
+                <h1 >Offers List :</h1>
+              </div>
+              <div style={{ float: 'left', position: 'relative', width: '70%', height: '80px', top:"5%"}}>
+                <div align="right" style={{ clear:"left",right:'3px', position:'absolute', bottom:'5px',width:'40%'}}>
+                <nav style={{margin: "5px"}}>
+                  <label style={{margin: "5px"}}>Sortuj : </label>
+                  <label className="btn btn-light btn-sm"  onClick={()=>this.SortHandle("price")} style={{borderRadius: "5px 0px 0px 5px"}}>Price</label> 
+                  <label className="btn btn-light btn-sm" onClick={()=>this.SortHandle("date")} style={{borderRadius: "0px"}}>Date</label> 
+                  <label className="btn btn-light btn-sm" onClick={()=>this.SortHandle("rating")} style={{borderRadius: "0px 5px 5px 0px"}}>Rating</label>
+                  <label className="btn" onClick={this.descChange}>{this.state.desc? <i className="fa fa-arrow-down" />: <i className="fa fa-arrow-up"/>} </label>
+                  </nav>
+                </div>
               </div>
             </div>
-          </div>
-          {loading ?
-            <div>
-              <p style={{clear:'left'}}>Loading ...</p>
-              <br />
-            </div>            
-            :
-            <div style={{clear:'left'}}>
-              {offers && offers.map((offer => 
-              <Offer 
-              key={offer.id}
-              offer={offer} 
-              openPopupbox={this.openPopupbox}
-              detailsVisible={this.detailsVisible}
-              deleteOffer={this.deleteOffer}
-              editOffer={this.editOffer}
-              />))}
-              <br />
-              <Link to="/new">
-                <Button variant="outline-secondary" className="rounded-pill"> <i className="fa fa-plus"></i> Create Offer</Button>
-              </Link>
+            {loading ?
               <div>
-              <PopupboxContainer />
-              </div>
-            </div>          
-          }          
-        </div>        
-      </div>
+                <p style={{clear:'left'}}>Loading ...</p>
+                <br />
+              </div>            
+              :
+              <div style={{clear:'left'}}>
+                {offers && offers.map((offer => 
+                <Offer 
+                key={offer.id}
+                offer={offer} 
+                openPopupbox={this.openPopupbox}
+                detailsVisible={this.detailsVisible}
+                deleteOffer={this.deleteOffer}
+                editOffer={this.editOffer}
+                />))}
+                <br />
+                <Link to="/new">
+                  <Button variant="outline-secondary" className="rounded-pill"> <i className="fa fa-plus"></i> Create Offer</Button>
+                </Link>
+                <div>
+                <PopupboxContainer />
+                </div>
+              </div>          
+            }          
+          </div>
+          }        
+        </div>
     );
   }
 }
@@ -193,7 +201,7 @@ const mapStateToProps = (state /*, ownProps*/) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
- loadOffers: ()=> dispatch(loadOffers()),
+ loadOffers: (user)=> dispatch(loadOffers(user)),
  offerDelete: id => dispatch(offerDelete(id)),
  filtrOffers: (city,people,From,To)=>dispatch(filtrOffers(city,people,From,To)),
  sortOffers: (sort,desc) => dispatch(sortOffers(sort,desc)),
@@ -203,4 +211,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PageOffersList)
+) (withRouter(PageOffersList));

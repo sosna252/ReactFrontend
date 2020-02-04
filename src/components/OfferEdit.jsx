@@ -114,7 +114,7 @@ class OfferEdit extends React.Component {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'securityTokenValue': "9fcbf4ff-5ea9-4027-ba82-5a7a7c59c156"
+        'securityTokenValue': this.props.user
       },
       body: JSON.stringify(offer)
     })
@@ -199,7 +199,9 @@ class OfferEdit extends React.Component {
   }
 }
 const mapStateToProps = (state) => {
-  return {     
+  return {  
+    login: state.login,
+    user: state.user   
   };
 };
 
