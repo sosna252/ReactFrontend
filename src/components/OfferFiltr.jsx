@@ -6,7 +6,6 @@ class OfferFiltr extends React.Component {
   constructor(props) {
     super(props);
     this.state ={
-        filtr: "-",
         From: null,
         To: null,
         city: null,
@@ -46,6 +45,7 @@ class OfferFiltr extends React.Component {
       } = this.state;
     return (
       <div align="center" style={{ width:"90%"}}>
+        <form onSubmit={() => {this.props.handleFiltred(city,people,From,To)}}>
         <p style={{ margin:"5px",float:'left'}}>City : </p>
         <input className="form-control form-control-sm" placeholder="Write something" onChange={this.cityChanged} style={{ borderRadius: '10px', float:'left', width:'20%'}}></input>
         <p style={{margin:"5px", float:'left'}}>No. people : </p> &nbsp;
@@ -53,11 +53,13 @@ class OfferFiltr extends React.Component {
         <p style={{margin:"5px", float:'left'}}>From : </p> <input className="form-control form-control-sm" onChange={this.dateFromChanged} style={{ float:'left', width: "150px"}} type="date" />
         <p style={{ margin:"5px", float:'left'}}>To : </p> <input className="form-control form-control-sm" onChange={this.dateToChanged} style={{ float:'left',width: "150px"}} type="date" />
         <div align="center" style={{margin:"10px", clear:"left"}}>
-          <Button  className="rounded-pill" variant="success" size="sm" onClick={() => {this.props.handleFiltred(city,people,From,To)}}><i className="fa fa-search"></i> Filtr</Button>
+          <Button  className="rounded-pill" variant="success" size="sm" type="submit" ><i className="fa fa-search"></i> Filtr</Button>
           &nbsp;
           <Button className="rounded-pill" variant="warning" size="sm" onClick={() => {this.props.changeVisibility()}}>Cancel</Button>
+          &nbsp;
+          <Button className="rounded-pill" variant="danger" size="sm" onClick={() => {this.props.handleFiltred(null,0,null,null)}}>Reset</Button>
         </div>
-        
+        </form>
       </div>
     );
   }

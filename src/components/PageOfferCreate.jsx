@@ -14,18 +14,15 @@ class PageOfferCreate extends React.Component {
       start_date_time: getParsedDate(new Date().toLocaleDateString()),
       end_date_time: getParsedDate(new Date().toLocaleDateString()),
       description: '',
-      photo: null,
       room_number: 1,
       beds: 1,
       price: 10,
-      rating: 0,
       city: '',
       address: '',
       country:'Poland',      
       isSaving: false,
       error: null      
     }
-
     this.descriptionChanged = this.descriptionChanged.bind(this);
     this.cityChanged = this.cityChanged.bind(this);
     this.addressChanged = this.addressChanged.bind(this);
@@ -94,11 +91,9 @@ class PageOfferCreate extends React.Component {
       start_date_time,
       end_date_time,
       description,
-      photo,
       room_number,
       beds,
       price,
-      rating,
       city,
       address,
       country
@@ -112,7 +107,7 @@ class PageOfferCreate extends React.Component {
       "room_number": room_number,
       "beds": beds,
       "price": price,
-      "rating": (Math.floor(Math.random() * (5 - 1)) + 1),
+      "rating": (Math.floor(Math.random() * 5)),
       "city": city,
       "address": address,
       "country": country
@@ -132,7 +127,10 @@ class PageOfferCreate extends React.Component {
         this.addPhoto(res.id);
 
     })
-    this.props.history.push("/list");
+    const timer = setTimeout(()=>{
+      this.props.history.push("/list");
+  },1000);
+    
   }
   addPhoto(id){
     console.log(this.state.photo)
@@ -148,8 +146,6 @@ class PageOfferCreate extends React.Component {
       if(res.status !== 200) {
         this.setState({ isSaving: false, error: `Saving returned status ${res.status}`})
         alert("Something wrong");
-      } else {
-        this.props.history.push("/list");
       }
     })  
   }
@@ -171,9 +167,10 @@ class PageOfferCreate extends React.Component {
 
     return (
       <div align="center">
-        {!this.props.login ? <PageLogOut />
+        {!this.props.login ? 
+          <PageLogOut />
         :
-          <div className="bg" style={{width: '1004px'}}>
+          <div style={{width: '1004px'}}>
             <div align="center" style={{width: '944px', position: 'relative'}}>
               <h1>Enter offer data:</h1>                
               <form onSubmit={(e)=>this.createOffer(e)}>
@@ -211,7 +208,7 @@ class PageOfferCreate extends React.Component {
                     <div><input className="input-transfer-data form-control" type="number" step="1" min="10" value={price} onChange={this.priceChanged} disabled={isSaving} required /></div>
                     
                     <div><label className="label-text">Photo : </label></div>
-                    <div><input className="input-transfer-data btn btn-light" type="file" accept="image/png, image/jpeg" onChange={this.photoChanged} disabled={isSaving} required/></div>
+                    <div><input className="input-transfer-data btn btn-light" type="file" accept="image/jpeg" onChange={this.photoChanged} disabled={isSaving} required/></div>
 
                     <div><label className="label-text">Date From : </label></div>
                     <div><input className="input-transfer-data form-control" type="date" value={start_date_time} onChange={this.startDateChanged} disabled={isSaving} required/></div>

@@ -10,8 +10,11 @@ class Offer extends React.Component {
         }
         this.detailsVisible = this.detailsVisible.bind(this);
     }
+    
     detailsVisible = () => {
-        this.setState({details: !this.state.details})
+        const timer = setTimeout(()=>{
+            this.setState({details: !this.state.details})
+        },100);        
     }
     
     render(){

@@ -30,7 +30,7 @@ body, html {
   border-radius: 10px;
   background: rgb(221,245,255);
   background: linear-gradient(270deg, rgba(221,245,255,1) 0%, rgba(240,245,247,1) 15%, rgba(255,255,255,1) 50%, rgba(240,245,247,1) 85%, rgba(221,245,255,1) 100%);
-  box-shadow:  10px 27px 10px rgba(48,50,50,1) !important;
+  box-shadow: 10px 10px 27px 5px rgba(48,50,50,1) !important;
 }
 .grid-container {
   display: grid;

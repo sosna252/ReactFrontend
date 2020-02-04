@@ -10,6 +10,7 @@ class Header extends React.Component {
     super(props);
     this.logOut = this.logOut.bind(this);
   }
+
   logOut(){
     this.props.UserLogOut();
     this.props.history.push("/");
@@ -21,16 +22,17 @@ class Header extends React.Component {
         <NavLink exact activeClassName="active" to="/">
         <Button variant="light" className="rounded-circle" style={{marginTop: '5px', marginLeft: '3px'}}><i className="fa fa-home "></i></Button>
         </NavLink>
-        {this.props.login ? 
-          <Button variant="dark" className="rounded-pill" onClick={this.logOut}style={{marginTop: '5px', right:'175px', position:'absolute'}}> Log Out</Button>
+        {
+        this.props.login ? 
+          <Button variant="dark" className="rounded-pill" onClick={this.logOut} style={{marginTop: '5px', right:'175px', position:'absolute'}}> <i class="fa fa-sign-out" ></i> Log Out</Button>
          :
-         null
+          null
          }
         <NavLink activeClassName="active"  to="/list">
-        <Button variant="primary" className="rounded-pill" style={{marginTop: '5px', right:'80px', position:'absolute'}}><i className="fa fa-list "></i> Offers</Button>
+          <Button variant="primary" className="rounded-pill" style={{marginTop: '5px', right:'80px', position:'absolute'}}><i className="fa fa-list "></i> Offers</Button>
         </NavLink>
         <NavLink activeClassName="active" to="/new">
-        <Button variant="secondary" className="rounded-pill" style={{marginTop: '5px', right:'3px', position:'absolute',}}><i className="fa fa-plus "></i> Add</Button>
+          <Button variant="secondary" className="rounded-pill" style={{marginTop: '5px', right:'3px', position:'absolute'}}><i className="fa fa-plus "></i> Add</Button>
         </NavLink>
       </nav>  
     );

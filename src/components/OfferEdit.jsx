@@ -16,7 +16,6 @@ class OfferEdit extends React.Component {
       room_number: this.props.offer.room_number,
       beds: this.props.offer.beds,
       price: this.props.offer.price,
-      rating: this.props.offer.rating,
       city: this.props.offer.city,
       address: this.props.offer.address,
       country: this.props.offer.country,
@@ -104,7 +103,6 @@ class OfferEdit extends React.Component {
       "room_number": room_number,
       "beds": beds,
       "price": price,
-      "rating": rating,
       "city": city,
       "address": address,
       "country": country

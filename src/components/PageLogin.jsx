@@ -76,14 +76,14 @@ class PageLogin extends React.Component {
                                 <div align="center"><label  className="label-text"><b>Password : </b></label></div>
                                 <div align="center"><input className="input-transfer-data form-control" type="password" onChange={this.passwordChanged}/></div>
                                 <br />
-                                <div align="center"><Button  type="submit" variant="outline-primary">Log in</Button></div>
+                                <div align="center"><Button  type="submit" variant="outline-primary"><i class="fa fa-sign-in"></i> Log in</Button></div>
                             </form>
                             <br />
                         </div>
                     :
                         <div align="center" style={{ width: '944px', position: 'relative' }}>
                             <h1 align="center">You are login</h1>
-                            <Button variant="dark" className="rounded-pill" onClick={this.logOut}> Log Out</Button>
+                            <Button variant="dark" className="rounded-pill" onClick={this.logOut}><i class="fa fa-sign-out"></i> Log Out</Button>
                         </div>
                         
                     }

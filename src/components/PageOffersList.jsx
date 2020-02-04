@@ -27,7 +27,6 @@ class PageOffersList extends React.Component {
     super(props);
     this.state ={
       filtrVisible: false,
-      filtrText: "-",
       sortText: "date",
       sorted: false,
       desc: false,
@@ -43,10 +42,8 @@ class PageOffersList extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.login)
     if(this.props.login)
     {
-      console.log(this.props.user);
       this.props.loadOffers(this.props.user);
     }
   }

@@ -9,13 +9,11 @@ export const initialState = {
   login:false,
 };
 
-// Read this: https://redux.js.org/basics/reducers
 
 const appReducer = (state = initialState, action) => {
   switch (action.type) {
     case OFFERS_LOADED: {
       const { offers } = action.payload;
-      // CAREFUL: You can't modify state variable directly.
       return Object.assign({}, state, { offers,offLoaded: true,error: false,loading:false });
     }
     case OFFERS_LOADING:{
