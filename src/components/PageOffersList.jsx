@@ -140,13 +140,14 @@ class PageOffersList extends React.Component {
             <div style={{float: 'left', width: '30%'}}>
               <h1 >Offers List :</h1>
             </div>
-            <div style={{ float: 'left', position: 'relative', width: '70%', height: '80px'}}>
+            <div style={{ float: 'left', position: 'relative', width: '70%', height: '80px', top:"5%"}}>
               <div align="right" style={{ clear:"left",right:'3px', position:'absolute', bottom:'5px',width:'40%'}}>
-              Sortuj: 
+              
               <nav >
-                <p className="btn btn-light"  onClick={()=>this.SortHandle("price")} style={{borderRadius: "5px 0px 0px 5px"}}>Price</p> 
-                <p className="btn btn-light" onClick={()=>this.SortHandle("date")} style={{borderRadius: "0px"}}>Date</p> 
-                <p className="btn btn-light" onClick={()=>this.SortHandle("rating")} tyle={{borderRadius: "0px 5px 5px 0px" }}>Rating</p>
+                <label style={{bottom: "20px"}}>Sortuj : </label>
+                <p className="btn btn-light btn-sm"  onClick={()=>this.SortHandle("price")} style={{borderRadius: "5px 0px 0px 5px"}}>Price</p> 
+                <p className="btn btn-light btn-sm" onClick={()=>this.SortHandle("date")} style={{borderRadius: "0px"}}>Date</p> 
+                <p className="btn btn-light btn-sm" onClick={()=>this.SortHandle("rating")} tyle={{borderRadius: "0px 5px 5px 0px" }}>Rating</p>
                 <p className="btn" onClick={this.descChange}>{this.state.desc? <i className="fa fa-arrow-down" />: <i className="fa fa-arrow-up"/>} </p>
                 </nav>
               </div>

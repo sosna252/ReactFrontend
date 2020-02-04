@@ -176,11 +176,11 @@ class PageOfferCreate extends React.Component {
             <form onSubmit={(e)=>this.createOffer(e)}>
                 <div className="grid-container">
                   <div><label htmlFor="title" className="label-text">Title : </label></div>
-                  <div><input id="title" className="form-control input-transfer-data "  name="title" minLength="2" type="text" value={title} onChange={this.titleChanged} disabled={isSaving} /></div>
+                  <div><input id="title" className="form-control input-transfer-data "  name="title" minLength="2" type="text" value={title} onChange={this.titleChanged} disabled={isSaving} required /></div>
                   
                   <div><label className="label-text">Country : </label></div>
                   <div>
-                    <select className="input-transfer-data form-control" value={country} onChange={this.countryChanged} disabled={isSaving}>
+                    <select className="input-transfer-data form-control" value={country} onChange={this.countryChanged} disabled={isSaving} required>
                       <option value="Poland">Poland</option>
                       <option value="USA">USA</option>
                       <option value="Canada">Canada</option>
@@ -193,32 +193,32 @@ class PageOfferCreate extends React.Component {
                   </div>
                   
                   <div><label htmlFor="city" className="label-text">City : </label></div>
-                  <div><input id="city"  className="input-transfer-data form-control" name="city" value={city} onChange={this.cityChanged} disabled={isSaving} /></div>
+                  <div><input id="city"  className="input-transfer-data form-control" name="city" value={city} onChange={this.cityChanged} disabled={isSaving} required /></div>
                   
                   <div><label htmlFor="address" className="label-text">Address : </label></div>
-                  <div><input className="input-transfer-data form-control" name="address" id="address" value={address} onChange={this.addressChanged} disabled={isSaving} /></div>
+                  <div><input className="input-transfer-data form-control" name="address" id="address" value={address} onChange={this.addressChanged} disabled={isSaving} required /></div>
                   
                   <div><label className="label-text">Room Number : </label></div>
-                  <div><input className="input-transfer-data form-control" type="number" step="1" min="1" value={room_number} onChange={this.roomNumberChanged} disabled={isSaving} /></div>
+                  <div><input className="input-transfer-data form-control" type="number" step="1" min="1" value={room_number} onChange={this.roomNumberChanged} disabled={isSaving} required/></div>
 
                   <div><label className="label-text">Number of beds : </label></div>
-                  <div><input className="input-transfer-data form-control" type="number" step="1" min="1" value={beds} onChange={this.bedsChanged} disabled={isSaving} /></div>
+                  <div><input className="input-transfer-data form-control" type="number" step="1" min="1" value={beds} onChange={this.bedsChanged} disabled={isSaving} required /></div>
                   
                   <div><label className="label-text">Price : </label></div>
-                  <div><input className="input-transfer-data form-control" type="number" step="1" min="10" value={price} onChange={this.priceChanged} disabled={isSaving} /></div>
+                  <div><input className="input-transfer-data form-control" type="number" step="1" min="10" value={price} onChange={this.priceChanged} disabled={isSaving} required /></div>
                   
                   <div><label className="label-text">Photo : </label></div>
-                  <div><input className="input-transfer-data btn btn-light" type="file" accept="image/png, image/jpeg" onChange={this.photoChanged} disabled={isSaving}/></div>
+                  <div><input className="input-transfer-data btn btn-light" type="file" accept="image/png, image/jpeg" onChange={this.photoChanged} disabled={isSaving} required/></div>
 
                   <div><label className="label-text">Date From : </label></div>
-                  <div><input className="input-transfer-data form-control" type="date" value={start_date_time} onChange={this.startDateChanged} disabled={isSaving}/></div>
+                  <div><input className="input-transfer-data form-control" type="date" value={start_date_time} onChange={this.startDateChanged} disabled={isSaving} required/></div>
                   
                   <div><label className="label-text">Date To : </label></div>
-                  <div><input className="input-transfer-data form-control" type="date"  value={end_date_time} onChange={this.endDateChanged} min={start_date_time} disabled={isSaving}/></div>
+                  <div><input className="input-transfer-data form-control" type="date"  value={end_date_time} onChange={this.endDateChanged} min={start_date_time} disabled={isSaving} required/></div>
                   
 
                   <div><label htmlFor="description" className="label-text">Description : </label></div>
-		              <div><textarea id="description" className="input-transfer-data form-control" name="description" value={description} onChange={this.descriptionChanged} disabled={isSaving}></textarea></div>
+		              <div><textarea id="description" className="input-transfer-data form-control" name="description" value={description} onChange={this.descriptionChanged} disabled={isSaving} required ></textarea></div>
                 </div>
                 <br />
                 <Button variant="success" type="submit">{!isSaving ? <span>Create offer</span> : <span>Saving ...</span>}</Button>
