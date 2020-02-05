@@ -101,7 +101,7 @@ class PageOffersList extends React.Component {
     PopupboxManager.close();
   }
   Update() {
-    this.props.loadOffers();
+    this.props.loadOffers(this.props.user);
     PopupboxManager.close();
   }
 
