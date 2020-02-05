@@ -24,7 +24,7 @@ class Header extends React.Component {
         </NavLink>
         {
         this.props.login ? 
-          <Button variant="dark" className="rounded-pill" onClick={this.logOut} style={{marginTop: '5px', right:'175px', position:'absolute'}}> <i class="fa fa-sign-out" ></i> Log Out</Button>
+          <Button variant="dark" className="rounded-pill" onClick={this.logOut} style={{marginTop: '5px', right:'175px', position:'absolute'}}> <i className="fa fa-sign-out" ></i> Log Out</Button>
          :
           null
          }

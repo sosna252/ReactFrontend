@@ -123,25 +123,25 @@ export const sortOffers=(sort,desc, token)=>{
 export const filtrOffers=(city,people,From,To,token)=>{
   return(dispatch)=>{
     dispatch(offersLoadingOffers())
-    var fromTmp="1000-01-01";
-    var toTmp="3000-01-01";
     var Tmp="";    
-    if(From!==null)
-    {
-      fromTmp = From;
-    }
-    if(To!==null)
-    {
-      toTmp = To;
-    }
+    
     if(city!==null)
     {
-       Tmp = `http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items?city=${city}&people=${people}&dateFrom=${fromTmp}&dateTo=${toTmp}`;
+       Tmp = `http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items?city=${city}&people=${people}`;
     }
     else
     {
-      Tmp = `http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items?people=${people}&dateFrom=${fromTmp}&dateTo=${toTmp}`
+      Tmp = `http://flatlybackend-env.apt77knte5.us-east-1.elasticbeanstalk.com/items?people=${people}`
     }
+    if(From!==null)
+    {
+      Tmp = Tmp + `&dateFrom=${From}`;
+    }
+    if(To!==null)
+    {
+      Tmp = Tmp + `&dateTo=${To}`;
+    }
+    console.log(Tmp);
     fetch(Tmp, {
       method: 'GET', 
       headers: {

@@ -71,7 +71,6 @@ class PageOffersList extends React.Component {
     }
   }
   SortHandle(text){
-    console.log(text)
     this.setState({sortText: text, sorted: true})
     this.props.sortOffers(text, this.state.desc, this.props.user);
   }
@@ -81,7 +80,6 @@ class PageOffersList extends React.Component {
   }
 
   handleFiltred(city, people, From, To){
-    console.log(city)
     this.props.filtrOffers(city, people, From, To, this.props.user);
     this.changeVisibility();
   }
@@ -126,7 +124,6 @@ class PageOffersList extends React.Component {
 
   
   detailsVisible = () => {
-    console.log('hey');
     this.setState=({details: !this.state.details})
 }
 
