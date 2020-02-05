@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import { UserLogging } from '../redux/actions';
+import { UserLogOut } from '../redux/actions';
 
 class PageLogin extends React.Component {
     constructor(props) { 
@@ -19,6 +20,7 @@ class PageLogin extends React.Component {
         this.logOut = this.logOut.bind(this);
     
     }
+    
     
     passwordChanged(e) {
     this.setState({ password: e.target.value });
@@ -82,13 +84,10 @@ class PageLogin extends React.Component {
                         </div>
                     :
                         <div align="center" style={{ width: '944px', position: 'relative' }}>
-                            <h1 align="center">You are login</h1>
+                            <h1 align="center">You are log in</h1>
                             <Button variant="dark" className="rounded-pill" onClick={this.logOut}><i className="fa fa-sign-out"></i> Log Out</Button>
-                        </div>
-                        
-                    }
-                    
-                    
+                        </div>                        
+                    }                  
                 </div>
             </div>
         )
@@ -103,6 +102,7 @@ const mapStateToProps = (state) => {
   };
   
   const mapDispatchToProps = dispatch => ({
-    UserLogging: (user)=> dispatch(UserLogging(user))
+    UserLogging: (user)=> dispatch(UserLogging(user)),
+    UserLogOut: () => dispatch(UserLogOut()),
   });
   export default connect(mapStateToProps, mapDispatchToProps) (withRouter(PageLogin));
